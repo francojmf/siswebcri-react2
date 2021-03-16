@@ -18,7 +18,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import api from '../../../services/api';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-import { useStyles } from '../../../functions/use-styles';
+import { useStyles } from '../../../functions/use_styles';
 
 export default function ProdutosListagem() {
   const classes = useStyles();

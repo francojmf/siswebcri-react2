@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,7 +12,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import api from '../../../services/api';
-
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -25,7 +20,7 @@ import { getNomeTipo, getNomeTipoLabel } from '../../../functions/static_data';
 import AddIcon from '@material-ui/icons/Add';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import ClearIcon from '@material-ui/icons/Clear';
-import { useStyles } from '../../../functions/use-styles';
+import { useStyles } from '../../../functions/use_styles';
 
 export default function UsuariosListagem() {
   const classes = useStyles();

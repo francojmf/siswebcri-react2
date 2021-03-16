@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
+const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },

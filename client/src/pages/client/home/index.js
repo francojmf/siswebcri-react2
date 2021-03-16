@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import MenuHome from '../../../components/menu-home';
 import Footer from '../../../components/footer-admin';
-import { useStyles } from '../../../functions/use-styles';
+import { useStyles } from '../../../functions/use_styles';
 
 export default function Home() {
   const classes = useStyles();

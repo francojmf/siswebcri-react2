@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
-import { useStyles } from '../../../functions/use-styles';
+import { useStyles } from '../../../functions/use_styles';
 
 export default function ProdutoCadastrar() {
   const classes = useStyles();

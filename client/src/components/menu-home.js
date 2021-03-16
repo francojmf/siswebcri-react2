@@ -18,7 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { mainListItems, secondaryListItems } from './list-menu-usuario';
 import { getNomeUsuario } from '../services/auth';
 import logoSistema from '../assets/img/logo-empresa.png';
-import { useStyles } from '../functions/use-style-menu';
+import { useStyles } from '../functions/use_style_menu';
 
 const drawerWidth = 240;
 

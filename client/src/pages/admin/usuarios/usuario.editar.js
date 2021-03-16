@@ -11,7 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useParams } from 'react-router-dom';
-import { useStyles } from '../../../functions/use-styles';
+import { useStyles } from '../../../functions/use_styles';
 
 export default function MeuUsuarioEditar() {
   const classes = useStyles();

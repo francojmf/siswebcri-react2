@@ -12,7 +12,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
-import { useStyles } from '../../../functions/use-styles';
+import { useStyles } from '../../../functions/use_styles';
 
 export default function ProdutoEditar() {
   const classes = useStyles();
