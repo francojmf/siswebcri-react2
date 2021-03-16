@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -19,26 +16,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  root: { display: 'flex' },
-  title: { flexGrow: 1 },
-  appBarSpacer: theme.mixins.toolbar,
-  content: { flexGrow: 1, height: '100vh', overflow: 'auto' },
-  container: { paddingTop: theme.spacing(2), paddingBottom: theme.spacing(4) },
-  paper: {
-    padding: 35,
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  formControl: { width: '100%' },
-  btnSuccess: {
-    backgroundColor: 'green',
-    color: '#fff',
-    '&:hover': { backgroundColor: '#12b912' },
-  },
-}));
+import { useStyles } from '../../../functions/use-styles';
 
 export default function UsuarioEditar() {
   const classes = useStyles();
