@@ -23,7 +23,7 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon style={{ color: 'green' }} />
       </ListItemIcon>
-      <ListItemText primary="Usuários (Login)" />
+      <ListItemText primary="Usuários" />
     </ListItem>
     <ListItem button component="a" href="/admin/produtos">
       <ListItemIcon>

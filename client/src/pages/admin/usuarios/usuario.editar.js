@@ -8,11 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
-
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
@@ -45,6 +40,7 @@ export default function MeuUsuarioEditar() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [confirmaSenha, setConfirmaSenha] = useState('');
   const [tipo, setTipo] = useState('');
 
   const { idUsuario } = useParams();
@@ -72,9 +68,11 @@ export default function MeuUsuarioEditar() {
 
     if (nome !== '' && email !== '' && senha !== '' && tipo !== '') {
       const response = await api.put('/api/usuarios/', data);
-
+      if (senha !== confirmaSenha) {
+        alert('Senhas não estão iguais');
+      }
       if (response.status === 200) {
-        window.location.href = '/admin/usuarios';
+        window.location.href = '/usuario';
       } else {
         alert('Erro ao atualizar o usuário!');
       }
@@ -85,7 +83,7 @@ export default function MeuUsuarioEditar() {
 
   return (
     <div className={classes.root}>
-      <MenuUsuario title={'MEU USUÁRIO'} />
+      <MenuUsuario title={'Sis Web CRI - MEU USUÁRIO'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
@@ -126,33 +124,30 @@ export default function MeuUsuarioEditar() {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <FormControl className={classes.formControl}>
-                      <InputLabel id="labelTipo">Tipo</InputLabel>
-                      <Select
-                        labelId="labelTipo"
-                        id="tipo"
-                        value={tipo}
-                        onChange={(e) => setTipo(e.target.value)}
-                      >
-                        <MenuItem value={1}>Administrador</MenuItem>
-                        <MenuItem value={2}>Gerente</MenuItem>
-                        <MenuItem value={3}>Usuário</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
                       type="password"
                       required
                       id="senha"
                       name="senha"
-                      label="Senha"
+                      label="Nova Senha"
                       fullWidth
                       autoComplete="senha"
                       value={senha}
                       onChange={(e) => setSenha(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      type="password"
+                      required
+                      id="confirmaSenha"
+                      name="confirmaSenha"
+                      label="Repita a Senha"
+                      fullWidth
+                      autoComplete="confirmaSenha"
+                      value={confirmaSenha}
+                      onChange={(e) => setConfirmaSenha(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12}>

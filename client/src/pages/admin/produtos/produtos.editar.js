@@ -7,10 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
@@ -83,7 +79,7 @@ export default function ProdutoEditar() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'PRODUTOS'} />
+      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>

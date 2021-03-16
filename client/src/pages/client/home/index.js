@@ -49,13 +49,13 @@ export default function Home() {
             <p>
               - Para acessar o sistema e fazer pedidos é necessário um cadastro.
             </p>
-            <p>- Clique em "Novo Cadastro".</p>
+            <p>- Clique no link abaixo em "NOVO CADASTRO".</p>
             <p>- Preencha todos os campos obrigatórios.</p>
-            <p>- Em seguida acesse o sistema com "Login".</p>
+            <p>- Em seguida acesse o sistema clicando em "Fazer Login".</p>
           </div>
           <div>
             Não Cadastrado?
-            <Button component={Link} to="/usuarioNovo" color="success">
+            <Button component={Link} to="/usuarioNovo" color="primary">
               Novo Cadastro
             </Button>
           </div>

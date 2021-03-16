@@ -75,7 +75,7 @@ export default function ProdutosListagem() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'PRODUTOS'} />
+      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
