@@ -4,7 +4,6 @@ const DataSchema = new mongoose.Schema(
   {
     pedido: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'Pedido',
     },
     logradouro_endereco: String,

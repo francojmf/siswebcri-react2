@@ -4,7 +4,6 @@ const DataSchema = new mongoose.Schema(
   {
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'Usuario',
     },
     nome_entidade: String,

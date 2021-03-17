@@ -30,7 +30,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Editar Usuário" />
     </ListItem>
-    <ListItem button component="a" href="/usuario/pedidos">
+    <ListItem button component="a" href="/client/pedidos">
       <ListItemIcon>
         <ShoppingCartIcon style={{ color: 'green' }} />
       </ListItemIcon>

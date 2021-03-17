@@ -1,5 +1,4 @@
 const Pedido = require('../models/pedido.model');
-const Produto = require('../models/produto.model');
 
 module.exports = {
   async index(req, res) {
@@ -9,9 +8,15 @@ module.exports = {
   async create(req, res) {
     const { produto, entidade, endereco, qtd_pedido } = req.body;
     let data = {};
-    let pedido = await Pedido.findOne({ produto });
+    let pedido = await Pedido.findOne({ qtd_pedido });
+
     if (!pedido) {
-      data = { produto, entidade, endereco, qtd_pedido };
+      data = {
+        produto,
+        entidade,
+        endereco,
+        qtd_pedido,
+      };
       pedido = await pedido.create(data);
       return res.status(200).json(pedido);
     } else {
@@ -30,7 +35,12 @@ module.exports = {
   },
   async update(req, res) {
     const { _id, produto, entidade, endereco, qtd_pedido } = req.body;
-    const data = { produto, entidade, endereco, qtd_pedido };
+    const data = {
+      produto,
+      entidade,
+      endereco,
+      qtd_pedido,
+    };
     const pedido = await Pedido.findOneAndUpdate({ _id }, data, {
       new: true,
     });

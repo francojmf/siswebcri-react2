@@ -1,41 +1,54 @@
 import React from 'react';
-
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // IMPORTS ADMIN
 import Dashboard from './pages/admin/dashboard';
-
 import Produtos from './pages/admin/produtos';
 import ProdutoEditar from './pages/admin/produtos/produtos.editar';
 import ProdutoCadastrar from './pages/admin/produtos/produtos.cadastrar';
-
 import Usuarios from './pages/admin/usuarios';
 import UsuarioEditar from './pages/admin/usuarios/usuarios.editar';
 import MeuUsuarioEditar from './pages/admin/usuarios/usuario.editar';
 import UsuarioCadastrar from './pages/admin/usuarios/usuarios.cadastrar';
-
 // IMPORTS CLIENT
 import Home from './pages/client/home';
 import ProdutoDetails from './pages/client/produtos/produtos.details';
 import Login from './pages/admin/login';
 import UsuarioNovo from './pages/admin/usuarios/usuario.novo';
 import PrivateRoute from './services/wAuth';
+import EnderecoCadastrar from './pages/client/enderecos/enderecos.cadastrar';
+import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
+import Pedidos from './pages/client/pedidos';
+import Enderecos from './pages/client/enderecos';
+import Entidades from './pages/client/entidades';
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        {/* Rota Cliente 
+        {/* Rota Client
         <PrivateRoute path="/usuario" exact component={Usuario} />
         */}
         <Route path="/" exact component={Home} />
         <Route path="/produtos/:idProduto" exact component={ProdutoDetails} />
         <Route path="/usuario/cadastrar" exact component={UsuarioNovo} />
+        <Route path="/client/pedidos/" exact component={Pedidos} />
+        <Route path="/client/enderecos/" exact component={Enderecos} />
+        <Route path="/client/entidades/" exact component={Entidades} />
         <PrivateRoute path="/usuario" exact component={Dashboard} />
         <PrivateRoute
           path="/usuario/editar/:idUsuario"
           exact
           component={UsuarioEditar}
+        />
+        <PrivateRoute
+          path="/client/enderecos/cadastrar"
+          exact
+          component={EnderecoCadastrar}
+        />
+        <PrivateRoute
+          path="/client/entidades/cadastrar"
+          exact
+          component={EntidadeCadastrar}
         />
         {/* Rota Admin */}
         <Route path="/" exact component={Home} />

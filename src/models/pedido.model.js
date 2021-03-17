@@ -4,7 +4,6 @@ const DataSchema = new mongoose.Schema(
   {
     produto: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'Produto',
     },
     entidade: {
@@ -15,8 +14,8 @@ const DataSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Endereco',
     },
-    aprovado_pedido: Boolean,
-    qtd_pedido: { type: Number, default: 1 },
+    aprovado_pedido: { type: Boolean, default: false },
+    qtd_pedido: Number,
     status_pedido: String,
     enviado_pedido: Boolean,
     data_envio: String,

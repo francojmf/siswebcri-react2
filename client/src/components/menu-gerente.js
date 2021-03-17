@@ -16,8 +16,6 @@ import { getNomeUsuario } from '../services/auth';
 import logoSistema from '../assets/img/logo-empresa.png';
 import { useStyles } from '../functions/use_style_menu';
 
-const drawerWidth = 240;
-
 export default function MenuGerente({ title }) {
   const classes = useStyles();
 
