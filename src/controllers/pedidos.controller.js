@@ -1,14 +1,16 @@
 const Pedido = require('../models/pedido.model');
+const Usuario = require('../models/usuario.model');
+const usuario = Usuario.ObjectId;
 
 module.exports = {
   async index(req, res) {
-    const pedido = await Pedido.find(); //.populate('user')
+    const pedido = await Pedido.find().populate(usuario);
     res.json(pedido);
   },
 
   async create(req, res) {
     try {
-      let pedido = await Pedido.create({ ...req.body, user: req.userId });
+      let pedido = await Pedido.create({ ...req.body, usuario });
       return res.send(pedido);
     } catch {
       return res.status(400).json(pedido);

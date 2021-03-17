@@ -25,6 +25,7 @@ export default function PedidosListagem() {
 
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [produto, setProduto] = useState('');
 
   useEffect(() => {
     async function loadPedidos() {
@@ -70,36 +71,46 @@ export default function PedidosListagem() {
                         >
                           <TableHead>
                             <TableRow>
-                              <TableCell>Produto</TableCell>
-                              <TableCell align="center">Entidade</TableCell>
-                              <TableCell align="center">Endereco</TableCell>
-                              <TableCell align="center">
-                                Qtd Disponível
-                              </TableCell>
-                              <TableCell align="center">
-                                Data de Cadastro
-                              </TableCell>
+                              <TableCell>Pedido</TableCell>
+                              <TableCell align="center">Criança</TableCell>
+                              <TableCell align="center">Aprovado</TableCell>
+                              <TableCell align="center">Enviado</TableCell>
                               <TableCell align="right">Opções</TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {pedidos.map((row) => (
-                              <TableRow key={row._id}>
+                            {pedidos.map((item) => (
+                              <TableRow key={item._id}>
                                 <TableCell component="th" scope="row">
-                                  {row.produto}
+                                  {item._id.substr(0, 5)}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {row.entidade}
+                                  {item.nome_pessoa}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {row.logradouro}
+                                  {item.aprovado_pedido ? (
+                                    <i
+                                      className="fas fa-check"
+                                      style={{ color: 'green' }}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="fas fa-times"
+                                      style={{ color: 'red' }}
+                                    ></i>
+                                  )}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {row.qtd_pedido}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {new Date(row.createdAt).toLocaleString(
-                                    'pt-br'
+                                  {item.enviado_pedido ? (
+                                    <i
+                                      className="fas fa-check"
+                                      style={{ color: 'green' }}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="fas fa-times"
+                                      style={{ color: 'red' }}
+                                    ></i>
                                   )}
                                 </TableCell>
                                 <TableCell align="right">
@@ -107,14 +118,16 @@ export default function PedidosListagem() {
                                     <Button
                                       variant="contained"
                                       style={{ color: 'green' }}
-                                      href={'/client/pedidos/editar/' + row._id}
+                                      href={
+                                        '/client/pedidos/editar/' + item._id
+                                      }
                                     >
                                       <AutorenewIcon /> Atualizar
                                     </Button>
                                     <Button
                                       variant="contained"
                                       color="secondary"
-                                      onClick={() => handleDelete(row._id)}
+                                      onClick={() => handleDelete(item._id)}
                                     >
                                       <ClearIcon />
                                     </Button>

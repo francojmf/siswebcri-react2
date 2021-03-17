@@ -1,16 +1,16 @@
 const Entidade = require('../models/entidade.model');
 const Usuario = require('../models/usuario.model');
-const usuario = Usuario._id;
+const usuario = Usuario.ObjectId;
 
 module.exports = {
   async index(req, res) {
-    const entidade = await Entidade.find().populate(user);
+    const entidade = await Entidade.find().populate(usuario);
     res.json(entidade);
   },
 
   async create(req, res) {
     try {
-      let entidade = await Entidade.create({ ...req.body, user: req.userId });
+      let entidade = await Entidade.create({ ...req.body, usuario });
       return res.send(entidade);
     } catch {
       return res.status(400).json(entidade);
