@@ -2,6 +2,9 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // IMPORTS ADMIN
 import Dashboard from './pages/admin/dashboard';
+import Entidades from './pages/admin/entidades';
+import Pedidos from './pages/admin/pedidos';
+import PedidosEditar from './pages/admin/pedidos/pedidos.editar';
 import Produtos from './pages/admin/produtos';
 import ProdutoEditar from './pages/admin/produtos/produtos.editar';
 import ProdutoCadastrar from './pages/admin/produtos/produtos.cadastrar';
@@ -13,11 +16,13 @@ import UsuarioCadastrar from './pages/admin/usuarios/usuarios.cadastrar';
 import Home from './pages/client/home';
 import ProdutoDetails from './pages/client/produtos/produtos.details';
 import Login from './pages/admin/login';
-import UsuarioNovo from './pages/admin/usuarios/usuario.novo';
+import UsuarioNovo from './pages/client/home/usuario.novo';
 import PrivateRoute from './services/wAuth';
-import Entidades from './pages/client/entidades';
+import MinhaEntidade from './pages/client/entidades';
 import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
-import Pedidos from './pages/client/pedidos';
+import MeusPedidos from './pages/client/pedidos';
+import PedidoCadastrar from './pages/client/pedidos/pedidos.cadastrar';
+import PedidoEditar from './pages/client/pedidos/pedidos.editar';
 
 export default function Routes() {
   return (
@@ -29,26 +34,41 @@ export default function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/produtos/:idProduto" exact component={ProdutoDetails} />
         <Route path="/usuario/cadastrar" exact component={UsuarioNovo} />
-        <Route path="/client/pedidos/" exact component={Pedidos} />
-        <Route path="/client/entidades/" exact component={Entidades} />
+        <Route path="/client/pedidos/" exact component={MeusPedidos} />
+        <Route path="/client/entidades/" exact component={MinhaEntidade} />
         <PrivateRoute path="/usuario" exact component={Dashboard} />
         <PrivateRoute
           path="/usuario/editar/:idUsuario"
           exact
           component={UsuarioEditar}
         />
-
         <PrivateRoute
           path="/client/entidades/cadastrar"
           exact
           component={EntidadeCadastrar}
         />
+        <PrivateRoute
+          path="/client/pedidos/cadastrar"
+          exact
+          component={PedidoCadastrar}
+        />
+        <PrivateRoute
+          path="/admin/usuario/editar/:idUsuario"
+          exact
+          component={MeuUsuarioEditar}
+        />
+        <PrivateRoute
+          path="/client/pedidos/editar/:idPedido"
+          exact
+          component={PedidoEditar}
+        />
         {/* Rota Admin */}
         <Route path="/" exact component={Home} />
         <Route path="/admin/login" exact component={Login} />
         <PrivateRoute path="/admin" exact component={Dashboard} />
-
         <PrivateRoute path="/admin/produtos" exact component={Produtos} />
+        <Route path="/admin/pedidos/" exact component={Pedidos} />
+        <Route path="/admin/entidades/" exact component={Entidades} />
         <PrivateRoute
           path="/admin/produtos/cadastrar"
           exact
@@ -59,7 +79,11 @@ export default function Routes() {
           exact
           component={ProdutoEditar}
         />
-
+        <PrivateRoute
+          path="/admin/pedidos/editar/:idPedido"
+          exact
+          component={PedidosEditar}
+        />
         <PrivateRoute path="/admin/usuarios" exact component={Usuarios} />
         <PrivateRoute
           path="/admin/usuarios/cadastrar"
@@ -70,11 +94,6 @@ export default function Routes() {
           path="/admin/usuarios/editar/:idUsuario"
           exact
           component={UsuarioEditar}
-        />
-        <PrivateRoute
-          path="/admin/usuario/editar/:idUsuario"
-          exact
-          component={MeuUsuarioEditar}
         />
       </Switch>
     </BrowserRouter>
