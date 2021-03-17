@@ -4,7 +4,6 @@ const DataSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'Usuario',
     },
     nome_pessoa: String,
@@ -18,6 +17,10 @@ const DataSchema = new mongoose.Schema(
     produto: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Produto',
+    },
+    entidade: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Entidade',
     },
     aprovado_pedido: { type: Boolean, default: false },
     qtd_pedido: Number,

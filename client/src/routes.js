@@ -15,11 +15,9 @@ import ProdutoDetails from './pages/client/produtos/produtos.details';
 import Login from './pages/admin/login';
 import UsuarioNovo from './pages/admin/usuarios/usuario.novo';
 import PrivateRoute from './services/wAuth';
-import EnderecoCadastrar from './pages/client/enderecos/enderecos.cadastrar';
+import Entidades from './pages/client/entidades';
 import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
 import Pedidos from './pages/client/pedidos';
-import Enderecos from './pages/client/enderecos';
-import Entidades from './pages/client/entidades';
 
 export default function Routes() {
   return (
@@ -32,7 +30,6 @@ export default function Routes() {
         <Route path="/produtos/:idProduto" exact component={ProdutoDetails} />
         <Route path="/usuario/cadastrar" exact component={UsuarioNovo} />
         <Route path="/client/pedidos/" exact component={Pedidos} />
-        <Route path="/client/enderecos/" exact component={Enderecos} />
         <Route path="/client/entidades/" exact component={Entidades} />
         <PrivateRoute path="/usuario" exact component={Dashboard} />
         <PrivateRoute
@@ -40,11 +37,7 @@ export default function Routes() {
           exact
           component={UsuarioEditar}
         />
-        <PrivateRoute
-          path="/client/enderecos/cadastrar"
-          exact
-          component={EnderecoCadastrar}
-        />
+
         <PrivateRoute
           path="/client/entidades/cadastrar"
           exact

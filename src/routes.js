@@ -3,7 +3,6 @@ const routes = express.Router();
 const Usuario = require('./controllers/usuarios.controller');
 const Produto = require('./controllers/produtos.controller');
 const Pedido = require('./controllers/pedidos.controller');
-const Endereco = require('./controllers/enderecos.controller');
 const Entidade = require('./controllers/entidades.controller');
 routes.get('/', Usuario.index);
 // Rotas de Usuários
@@ -27,12 +26,6 @@ routes.get('/api/pedidos', Pedido.index);
 routes.get('/api/pedidos.details/:_id', Pedido.details);
 routes.delete('/api/pedidos/:_id', Pedido.delete);
 routes.put('/api/pedidos', Pedido.update);
-// Rotas de Enderecos
-routes.post('/api/enderecos', Endereco.create);
-routes.get('/api/enderecos', Endereco.index);
-routes.get('/api/enderecos.details/:_id', Endereco.details);
-routes.delete('/api/enderecos/:_id', Endereco.delete);
-routes.put('/api/enderecos', Endereco.update);
 // Rotas de Entidades
 routes.post('/api/entidades', Entidade.create);
 routes.get('/api/entidades', Entidade.index);

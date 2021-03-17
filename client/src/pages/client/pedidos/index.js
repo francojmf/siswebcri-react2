@@ -92,7 +92,7 @@ export default function PedidosListagem() {
                                   {row.entidade}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {row.endereco}
+                                  {row.logradouro}
                                 </TableCell>
                                 <TableCell align="center">
                                   {row.qtd_pedido}
@@ -148,7 +148,7 @@ export default function PedidosListagem() {
                     style={({ marginBottom: 10 }, { marginLeft: 10 })}
                     variant="contained"
                     color="success"
-                    href={'/client/enderecos/cadastrar'}
+                    href={'/client/entidades/cadastrar'}
                   >
                     <AddIcon />
                     Iniciar Pedido
