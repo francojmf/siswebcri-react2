@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const DataSchema = new mongoose.Schema(
   {
-    pedido: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Pedido',
+      required: true,
+      ref: 'Usuario',
     },
     logradouro_endereco: String,
     numero_endereco: Number,

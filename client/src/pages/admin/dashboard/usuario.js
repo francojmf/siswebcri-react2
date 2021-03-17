@@ -1,5 +1,6 @@
 import React from 'react';
 import ImgCri from '../../../assets/img/cri01.jpg';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 export default function Dashboard() {
   return (
@@ -26,6 +27,15 @@ export default function Dashboard() {
               <p>- Você tem acesso como Usuário comum e pode:</p>
               <p>- Editar seus dados e pedidos.</p>
               <p>- Fazer novos pedidos.</p>
+              <h4>Aviso</h4>
+              <p>
+                - Ao realizar o cadastro você estará concordando com os Termos
+                de Uso da UNIFESP.
+              </p>
+              <AccountBalanceIcon style={{ color: 'green' }} />
+              <a href="https://www.unifesp.br/termos-de-uso">
+                * Termos de Uso : UNIFESP *
+              </a>
             </td>
           </tr>
           <tr>

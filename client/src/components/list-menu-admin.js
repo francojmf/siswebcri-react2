@@ -4,9 +4,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-
+import AccessibleIcon from '@material-ui/icons/Accessible';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { getToken, logout } from '../services/auth';
 import api from '../services/api';
@@ -27,7 +26,7 @@ export const mainListItems = (
     </ListItem>
     <ListItem button component="a" href="/admin/produtos">
       <ListItemIcon>
-        <ShoppingCartIcon style={{ color: 'green' }} />
+        <AccessibleIcon style={{ color: 'green' }} />
       </ListItemIcon>
       <ListItemText primary="Produtos" />
     </ListItem>

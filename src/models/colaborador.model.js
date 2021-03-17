@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const DataSchema = new mongoose.Schema(
   {
-    usuario: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'Usuario',

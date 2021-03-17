@@ -2,11 +2,10 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import PeopleIcon from '@material-ui/icons/People';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import AccessibleIcon from '@material-ui/icons/Accessible';
+import PersonIcon from '@material-ui/icons/Person';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { getToken, logout } from '../services/auth';
 import api from '../services/api';
@@ -26,13 +25,13 @@ export const mainListItems = (
       href={'/admin/usuario/editar/' + getIdUsuario()}
     >
       <ListItemIcon>
-        <PeopleIcon style={{ color: 'green' }} />
+        <PersonIcon style={{ color: 'green' }} />
       </ListItemIcon>
       <ListItemText primary="Editar Usuário" />
     </ListItem>
     <ListItem button component="a" href="/client/pedidos">
       <ListItemIcon>
-        <ShoppingCartIcon style={{ color: 'green' }} />
+        <AccessibleIcon style={{ color: 'green' }} />
       </ListItemIcon>
       <ListItemText primary="Pedidos" />
     </ListItem>
@@ -47,7 +46,7 @@ export const secondaryListItems = (
     <ListItem>Logado como:</ListItem>
     <ListItem>
       <ListItemIcon>
-        <PeopleIcon style={{ color: 'green' }} />
+        <PersonIcon style={{ color: 'green' }} />
       </ListItemIcon>
       <p> {getNomeUsuario()}</p>
     </ListItem>
