@@ -19,27 +19,37 @@ import api from '../../../services/api';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
 import { useStyles } from '../../../functions/use_styles';
+import { withStyles } from '@material-ui/core/styles';
 
-export default function ProdutosListagem() {
+export default function EntidadesListagem() {
   const classes = useStyles();
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.success.main,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
 
-  const [produtos, setProdutos] = useState([]);
+  const [entidades, setEntidades] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadProdutos() {
-      const response = await api.get('/api/produtos');
-      setProdutos(response.data);
+    async function loadEntidades() {
+      const response = await api.get('/api/entidades');
+      setEntidades(response.data);
       setLoading(false);
     }
-    loadProdutos();
+    loadEntidades();
   }, []);
 
   async function handleDelete(id) {
-    if (window.confirm('Deseja realmente excluir este usuário?')) {
-      var result = await api.delete('/admin/produtos/' + id);
+    if (window.confirm('Deseja realmente excluir esta Entidade?')) {
+      var result = await api.delete('/admin/entidades/' + id);
       if (result.status === 200) {
-        window.location.href = '/admin/produtos';
+        window.location.href = '/admin/entidades';
       } else {
         alert('Ocorreu um erro. Por favor, tente novamente!');
       }
@@ -48,7 +58,7 @@ export default function ProdutosListagem() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
+      <MenuAdmin title={'Sis Web CRI - ENTIDADES'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -58,13 +68,13 @@ export default function ProdutosListagem() {
                 style={{ marginBottom: 10 }}
                 variant="contained"
                 color="success"
-                href={'/admin/produtos/cadastrar'}
+                href={'/admin/entidades/cadastrar'}
               >
                 <AddIcon />
                 Cadastrar
               </Button>
               <Paper className={classes.paper}>
-                <h2>Listagem de Produtos</h2>
+                <h2>Listagem de entidades</h2>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12}>
                     <TableContainer component={Paper}>
@@ -79,51 +89,56 @@ export default function ProdutosListagem() {
                         >
                           <TableHead>
                             <TableRow>
-                              <TableCell>Nome</TableCell>
-                              <TableCell align="center">Descrição</TableCell>
-                              <TableCell align="center">Tipo</TableCell>
-                              <TableCell align="center">
-                                Qtd Disponível
-                              </TableCell>
-                              <TableCell align="center">
-                                Data de Cadastro
-                              </TableCell>
-                              <TableCell align="right">Opções</TableCell>
+                              <StyledTableCell>Entidade</StyledTableCell>
+                              <StyledTableCell align="center">
+                                CPF ou CNPJ
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Endereço
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Cidade
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                CEP
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                Opções
+                              </StyledTableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {produtos.map((row) => (
-                              <TableRow key={row._id}>
+                            {entidades.map((item) => (
+                              <TableRow key={item._id}>
                                 <TableCell component="th" scope="row">
-                                  {row.nome_produto}
+                                  {item.nome_entidade}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                  {item.cpf_cnpj}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {row.descricao_produto}
+                                  {item.logradouro}, {item.numero} -
+                                  {item.complemento}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {row.tipo_produto}
+                                  {item.cidade} - {item.estado}
                                 </TableCell>
-                                <TableCell align="center">
-                                  {row.qtd_produto}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {new Date(row.createdAt).toLocaleString(
-                                    'pt-br'
-                                  )}
-                                </TableCell>
+                                <TableCell align="center">{item.cep}</TableCell>
                                 <TableCell align="right">
                                   <ButtonGroup aria-label="outlined success button group">
                                     <Button
                                       variant="contained"
                                       style={{ color: 'green' }}
-                                      href={'/admin/produtos/editar/' + row._id}
+                                      href={
+                                        '/client/entidades/editar/' + item._id
+                                      }
                                     >
                                       <AutorenewIcon /> Atualizar
                                     </Button>
                                     <Button
                                       variant="contained"
                                       color="secondary"
-                                      onClick={() => handleDelete(row._id)}
+                                      onClick={() => handleDelete(item._id)}
                                     >
                                       <ClearIcon />
                                     </Button>

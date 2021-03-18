@@ -4,37 +4,59 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import MenuAdmin from '../../../components/menu-admin';
+import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
+import { getNomeUsuario, getIdUsuario } from '../../../../src/services/auth';
 
-export default function ProdutoCadastrar() {
+export default function EntidadeCadastrar() {
   const classes = useStyles();
-
+  //  const nomeUsuario = getNomeUsuario();
+  const idUsuario = getIdUsuario();
   const [nome, setNome] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [tipo, setTipo] = useState('');
-  const [qtd, setQtd] = useState('');
+  const [cpf_cnpj, setCpf] = useState('');
+  const [fone, setFone] = useState('');
+  const [logradouro, setLogradouro] = useState('');
+  const [numero, setNumero] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [cep, setCep] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
 
   async function handleSubmit() {
     const data = {
-      nome_produto: nome,
-      descricao_produto: descricao,
-      tipo_produto: tipo,
-      qtd_produto: qtd,
+      user: idUsuario,
+      nome_entidade: nome,
+      cpf_cnpj: cpf_cnpj,
+      fone_entidade: fone,
+      logradouro: logradouro,
+      numero: numero,
+      complemento: complemento,
+      cep: cep,
+      cidade: cidade,
+      estado: estado,
     };
 
-    if (nome !== '' && descricao !== '' && tipo !== '' && qtd !== '') {
-      const response = await api.post('/api/produtos', data);
-
+    if (
+      nome !== '' &&
+      cpf_cnpj !== '' &&
+      fone !== '' &&
+      logradouro !== '' &&
+      numero !== '' &&
+      complemento !== '' &&
+      cep !== '' &&
+      cidade !== '' &&
+      estado !== ''
+    ) {
+      const response = await api.post('/api/entidades', data);
       if (response.status === 200) {
-        window.location.href = '/admin/produtos';
+        window.location.href = '/client/entidades';
       } else {
-        alert('Erro ao cadastrar o produto!');
+        alert('Erro ao cadastrar a entidade!');
       }
     } else {
       alert('Por favor, preencha todos os dados!');
@@ -43,7 +65,7 @@ export default function ProdutoCadastrar() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
+      <MenuUsuario title={'Sis Web CRI - Nova Entidade'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
@@ -53,64 +75,123 @@ export default function ProdutoCadastrar() {
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
-                href={'/admin/produtos'}
+                href={'/client/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>
               <Paper className={classes.paper}>
-                <h2>Cadastro de Produtos</h2>
+                <h2>Cadastro de Nova Entidade</h2>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={12}>
+                  <Grid item xs={12} sm={7}>
                     <TextField
                       required
+                      type="name"
                       id="nome"
                       name="nome"
-                      label="Nome do Produto"
+                      label="Nome da Entidade"
                       fullWidth
-                      autoComplete="nome"
                       value={nome}
                       onChange={(e) => setNome(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={5}>
                     <TextField
                       required
-                      id="descricao"
-                      name="descricao"
-                      label="Descrição do produto"
+                      type="name"
+                      id="cpf_cnpj"
+                      name="cpf_cnpj"
+                      label="CNPJ da entidade ou CPF do responsável"
                       fullWidth
-                      autoComplete="nome"
-                      value={descricao}
-                      onChange={(e) => setDescricao(e.target.value)}
+                      value={cpf_cnpj}
+                      onChange={(e) => setCpf(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={3}>
+
+                  <Grid item xs={12} sm={7}>
                     <TextField
                       type="name"
                       required
-                      id="tipo"
-                      name="tipo"
-                      label="Tipo"
+                      id="logradouro"
+                      name="logradouro"
+                      label="Logradouro"
                       fullWidth
-                      autoComplete="tipo"
-                      value={tipo}
-                      onChange={(e) => setTipo(e.target.value)}
+                      value={logradouro}
+                      onChange={(e) => setLogradouro(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      type="number"
+                      required
+                      id="numero"
+                      name="numero"
+                      label="Numero"
+                      fullWidth
+                      value={numero}
+                      onChange={(e) => setNumero(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={7}>
+                    <TextField
+                      required
+                      type="name"
+                      id="complemento"
+                      name="complemento"
+                      label="Complemento do endereço"
+                      fullWidth
+                      value={complemento}
+                      onChange={(e) => setComplemento(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      type="number"
                       required
-                      id="qtd"
-                      name="qtd"
-                      label="Quantidade"
+                      type="name"
+                      id="cep"
+                      name="cep"
+                      label="CEP do logradouro"
                       fullWidth
-                      autoComplete="qtd"
-                      value={qtd}
-                      onChange={(e) => setQtd(e.target.value)}
+                      value={cep}
+                      onChange={(e) => setCep(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={12}>
+                  <Grid item xs={12} sm={5}>
+                    <TextField
+                      required
+                      type="name"
+                      id="cidade"
+                      name="cidade"
+                      label="Cidade"
+                      fullWidth
+                      value={cidade}
+                      onChange={(e) => setCidade(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      required
+                      type="name"
+                      id="estado"
+                      name="estado"
+                      label="Estado"
+                      fullWidth
+                      value={estado}
+                      onChange={(e) => setEstado(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      required
+                      type="name"
+                      id="fone"
+                      name="fone"
+                      label="Telefone de contato"
+                      fullWidth
+                      value={fone}
+                      onChange={(e) => setFone(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
                     <Button
                       variant="contained"
                       onClick={handleSubmit}

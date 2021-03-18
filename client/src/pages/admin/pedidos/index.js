@@ -14,9 +14,9 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AddIcon from '@material-ui/icons/Add';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
-import ClearIcon from '@material-ui/icons/Clear';
+import { withStyles } from '@material-ui/core/styles';
 import api from '../../../services/api';
-import MenuUsuario from '../../../components/menu-usuario';
+import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
 import { useStyles } from '../../../functions/use_styles';
 
@@ -25,12 +25,24 @@ export default function PedidosListagem() {
 
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [produto, setProduto] = useState('');
+  const [entidades, setEntidades] = useState('');
+
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.success.main,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
 
   useEffect(() => {
     async function loadPedidos() {
       const response = await api.get('/api/pedidos');
       setPedidos(response.data);
+      const response2 = await api.get('/api/entidades');
+      setEntidades(response2.data);
       setLoading(false);
     }
     loadPedidos();
@@ -49,7 +61,7 @@ export default function PedidosListagem() {
 
   return (
     <div className={classes.root}>
-      <MenuUsuario title={'Sis Web CRI - Meus Pedidos'} />
+      <MenuAdmin title={'Sis Web CRI - PEDIDOS'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -71,21 +83,128 @@ export default function PedidosListagem() {
                         >
                           <TableHead>
                             <TableRow>
-                              <TableCell>Pedido</TableCell>
-                              <TableCell align="center">Criança</TableCell>
-                              <TableCell align="center">Aprovado</TableCell>
-                              <TableCell align="center">Enviado</TableCell>
-                              <TableCell align="right">Opções</TableCell>
+                              <StyledTableCell>Entidade</StyledTableCell>
+                              <StyledTableCell align="center">
+                                CPF ou CNPJ
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Endereço
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Cidade
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                CEP
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                Opções
+                              </StyledTableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {entidades.map((item) => (
+                              <TableRow key={item._id}>
+                                <TableCell component="th" scope="row">
+                                  {item.nome_entidade}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                  {item.cpf_cnpj}
+                                </TableCell>
+                                <TableCell align="center">
+                                  {item.logradouro}, {item.numero} -
+                                  {item.complemento}
+                                </TableCell>
+                                <TableCell align="center">
+                                  {item.cidade} - {item.estado}
+                                </TableCell>
+                                <TableCell align="center">{item.cep}</TableCell>
+                                <TableCell align="right">
+                                  <ButtonGroup aria-label="outlined success button group">
+                                    <Button
+                                      variant="contained"
+                                      style={{ color: 'green' }}
+                                      href={
+                                        '/client/entidades/editar/' + item._id
+                                      }
+                                    >
+                                      <AutorenewIcon /> Atualizar
+                                    </Button>
+                                  </ButtonGroup>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      )}
+                    </TableContainer>
+                    <div>
+                      <p>
+                        Para fazer um pedido é preciso "Cadastrar Entidade" com
+                        o endereço de entrega, caso ainda não tenha feito isto.
+                      </p>
+                      <Button
+                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
+                        variant="contained"
+                        color="success"
+                        href={'/admin/entidades/cadastrar'}
+                      >
+                        <AddIcon />
+                        Cadastrar Entidade
+                      </Button>
+                      <Button
+                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
+                        variant="contained"
+                        color="success"
+                        href={'/admin/pedidos/cadastrar'}
+                      >
+                        <AddIcon />
+                        Iniciar Pedido
+                      </Button>
+                      <p></p>
+                    </div>
+
+                    <TableContainer component={Paper}>
+                      {loading ? (
+                        <LinearProgress
+                          style={{ width: '50%', margin: '20px auto' }}
+                        />
+                      ) : (
+                        <Table
+                          className={classes.table}
+                          size="small"
+                          aria-label="a dense table"
+                        >
+                          <TableHead>
+                            <TableRow>
+                              <StyledTableCell>Pedido</StyledTableCell>
+                              <StyledTableCell align="center">
+                                Criança
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Idade
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Aprovado
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Enviado
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                Opções
+                              </StyledTableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
                             {pedidos.map((item) => (
                               <TableRow key={item._id}>
                                 <TableCell component="th" scope="row">
-                                  {item._id.substr(0, 5)}
+                                  {item._id.substr(20, 4)}
                                 </TableCell>
                                 <TableCell align="center">
                                   {item.nome_pessoa}
+                                </TableCell>
+                                <TableCell align="center">
+                                  {item.idade_pessoa}
                                 </TableCell>
                                 <TableCell align="center">
                                   {item.aprovado_pedido ? (
@@ -124,13 +243,6 @@ export default function PedidosListagem() {
                                     >
                                       <AutorenewIcon /> Atualizar
                                     </Button>
-                                    <Button
-                                      variant="contained"
-                                      color="secondary"
-                                      onClick={() => handleDelete(item._id)}
-                                    >
-                                      <ClearIcon />
-                                    </Button>
                                   </ButtonGroup>
                                 </TableCell>
                               </TableRow>
@@ -139,42 +251,18 @@ export default function PedidosListagem() {
                         </Table>
                       )}
                     </TableContainer>
+
                     <div>
                       <p>
-                        Para fazer um pedido é preciso "Cadastrar Entidade".
+                        Para fazer um pedido é necessário informar alguns dados
+                        da criaça que receberá a doação.
                       </p>
                       <p>
                         Para iniciar um novo pedido clique em "Iniciar Pedido".
                       </p>
+                      <p></p>
                     </div>
                   </Grid>
-                  <Button
-                    style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                    variant="contained"
-                    color="success"
-                    href={'/client/entidades/cadastrar'}
-                  >
-                    <AddIcon />
-                    Cadastrar Entidade
-                  </Button>
-                  <Button
-                    style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                    variant="contained"
-                    color="success"
-                    href={'/client/entidades/cadastrar'}
-                  >
-                    <AddIcon />
-                    Iniciar Pedido
-                  </Button>
-                  <Button
-                    style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                    variant="contained"
-                    color="success"
-                    href={'/client/pedidos/cadastrar'}
-                  >
-                    <AddIcon />
-                    Cadastrar Criança
-                  </Button>
                 </Grid>
               </Paper>
             </Grid>

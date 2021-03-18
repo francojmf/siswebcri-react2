@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // IMPORTS ADMIN
 import Dashboard from './pages/admin/dashboard';
 import Entidades from './pages/admin/entidades';
+import EntidadesCadastrar from './pages/admin/entidades/entidades.cadastrar';
 import Pedidos from './pages/admin/pedidos';
 import PedidosEditar from './pages/admin/pedidos/pedidos.editar';
 import Produtos from './pages/admin/produtos';
@@ -83,6 +84,11 @@ export default function Routes() {
           path="/admin/pedidos/editar/:idPedido"
           exact
           component={PedidosEditar}
+        />
+        <PrivateRoute
+          path="/admin/entidades/cadastrar"
+          exact
+          component={EntidadesCadastrar}
         />
         <PrivateRoute path="/admin/usuarios" exact component={Usuarios} />
         <PrivateRoute
