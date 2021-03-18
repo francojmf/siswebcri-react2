@@ -6,6 +6,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccessibleIcon from '@material-ui/icons/Accessible';
 import PersonIcon from '@material-ui/icons/Person';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { getToken, logout } from '../services/auth';
 import api from '../services/api';
@@ -33,7 +34,13 @@ export const mainListItems = (
       <ListItemIcon>
         <AccessibleIcon style={{ color: 'green' }} />
       </ListItemIcon>
-      <ListItemText primary="Pedidos" />
+      <ListItemText primary="Meus Pedidos" />
+    </ListItem>
+    <ListItem button component="a" href="/client/entidades">
+      <ListItemIcon>
+        <AccountBalanceIcon style={{ color: 'green' }} />
+      </ListItemIcon>
+      <ListItemText primary="Minha Entidade" />
     </ListItem>
   </div>
 );

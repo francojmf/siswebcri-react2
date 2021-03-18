@@ -9,7 +9,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 mongoose.connect(
-  'mongodb://localhost:27017/siswebcri-react2',
+  //'mongodb://localhost:27017/siswebcri-react2',
+  'mongodb+srv://unifesp:1245@siswebcri01.qz4ou.mongodb.net/siswebcri?retryWrites=true&w=majority',
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -19,7 +20,7 @@ mongoose.connect(
     if (err) {
       console.log(err);
     } else {
-      console.log('MongoDB CONECTADO com sucesso!');
+      console.log('MongoDB Atlas CONECTADO com sucesso!');
     }
   }
 );

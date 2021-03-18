@@ -23,7 +23,6 @@ const DataSchema = new mongoose.Schema(
       ref: 'Entidade',
     },
     aprovado_pedido: { type: Boolean, default: false },
-    qtd_pedido: Number,
     status_pedido: String,
     enviado_pedido: { type: Boolean, default: false },
     data_envio: String,

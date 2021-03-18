@@ -3,18 +3,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
+import PersonIcon from '@material-ui/icons/Person';
+import EventSeatIcon from '@material-ui/icons/EventSeat';
 import AccessibleIcon from '@material-ui/icons/Accessible';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import { getToken, logout } from '../services/auth';
+import { getNomeUsuario, getToken, logout } from '../services/auth';
 import api from '../services/api';
 
 export const mainListItems = (
   <div>
     <ListItem button component="a" href="/admin">
       <ListItemIcon>
-        <DashboardIcon style={{ color: 'green' }} />
+        <HomeIcon style={{ color: 'green' }} />
       </ListItemIcon>
       <ListItemText primary="Início" />
     </ListItem>
@@ -26,9 +29,21 @@ export const mainListItems = (
     </ListItem>
     <ListItem button component="a" href="/admin/produtos">
       <ListItemIcon>
-        <AccessibleIcon style={{ color: 'green' }} />
+        <EventSeatIcon style={{ color: 'green' }} />
       </ListItemIcon>
       <ListItemText primary="Produtos" />
+    </ListItem>
+    <ListItem button component="a" href="/admin/pedidos">
+      <ListItemIcon>
+        <AccessibleIcon style={{ color: 'green' }} />
+      </ListItemIcon>
+      <ListItemText primary="Pedidos" />
+    </ListItem>
+    <ListItem button component="a" href="/admin/entidades">
+      <ListItemIcon>
+        <AccountBalanceIcon style={{ color: 'green' }} />
+      </ListItemIcon>
+      <ListItemText primary="Entidades" />
     </ListItem>
   </div>
 );
@@ -38,6 +53,13 @@ export const secondaryListItems = (
     <ListSubheader inset style={{ color: 'green' }}>
       Opções
     </ListSubheader>
+    <ListItem>Logado como:</ListItem>
+    <ListItem>
+      <ListItemIcon>
+        <PersonIcon style={{ color: 'green' }} />
+      </ListItemIcon>
+      <p> {getNomeUsuario()}</p>
+    </ListItem>
     <ListItem button onClick={confirmSair}>
       <ListItemIcon>
         <ExitToApp style={{ color: 'green' }} />

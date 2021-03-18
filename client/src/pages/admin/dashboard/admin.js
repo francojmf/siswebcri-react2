@@ -24,7 +24,8 @@ export default function Dashboard() {
             <td colspan="6">Este é o modelo de cadeira de rodas disponível:</td>
             <td rowspan="2" colspan="6">
               <p>- Você tem acesso como Administrador e pode:</p>
-              <p>- Editar usuários, produtos e pedidos.</p>
+              <p>- Editar usuários, entidades, produtos e pedidos.</p>
+              <p>- Atualizar informações sobre os pedidos.</p>
               <p>- Gerar novos pedidos.</p>
             </td>
           </tr>
