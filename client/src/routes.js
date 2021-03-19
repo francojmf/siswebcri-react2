@@ -10,7 +10,7 @@ import Produtos from './pages/admin/produtos';
 import ProdutoEditar from './pages/admin/produtos/produtos.editar';
 import ProdutoCadastrar from './pages/admin/produtos/produtos.cadastrar';
 import Usuarios from './pages/admin/usuarios';
-import UsuarioEditar from './pages/admin/usuarios/usuarios.editar';
+import UsuariosEditar from './pages/admin/usuarios/usuarios.editar';
 import MeuUsuarioEditar from './pages/admin/usuarios/usuario.editar';
 import UsuarioCadastrar from './pages/admin/usuarios/usuarios.cadastrar';
 // IMPORTS CLIENT
@@ -18,6 +18,7 @@ import Home from './pages/client/home';
 import ProdutoDetails from './pages/client/produtos/produtos.details';
 import Login from './pages/admin/login';
 import UsuarioNovo from './pages/client/home/usuario.novo';
+import UsuarioEditar from './pages/client/usuario/usuario.editar';
 import PrivateRoute from './services/wAuth';
 import MinhaEntidade from './pages/client/entidades';
 import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
@@ -54,9 +55,9 @@ export default function Routes() {
           component={PedidoCadastrar}
         />
         <PrivateRoute
-          path="/admin/usuario/editar/:idUsuario"
+          path="/client/usuario/editar/:idUsuario"
           exact
-          component={MeuUsuarioEditar}
+          component={UsuarioEditar}
         />
         <PrivateRoute
           path="/client/pedidos/editar/:idPedido"
@@ -70,6 +71,11 @@ export default function Routes() {
         <PrivateRoute path="/admin/produtos" exact component={Produtos} />
         <Route path="/admin/pedidos/" exact component={Pedidos} />
         <Route path="/admin/entidades/" exact component={Entidades} />
+        <PrivateRoute
+          path="/admin/usuario/editar/:idUsuario"
+          exact
+          component={MeuUsuarioEditar}
+        />
         <PrivateRoute
           path="/admin/produtos/cadastrar"
           exact
@@ -99,7 +105,7 @@ export default function Routes() {
         <PrivateRoute
           path="/admin/usuarios/editar/:idUsuario"
           exact
-          component={UsuarioEditar}
+          component={UsuariosEditar}
         />
       </Switch>
     </BrowserRouter>

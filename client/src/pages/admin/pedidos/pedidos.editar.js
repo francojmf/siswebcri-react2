@@ -14,7 +14,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
 import { useStyles } from '../../../functions/use_styles';
 
-export default function ProdutoEditar() {
+export default function PedidoEditar() {
   const classes = useStyles();
 
   const [nome, setNome] = useState('');

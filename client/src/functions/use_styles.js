@@ -1,4 +1,6 @@
+import TableCell from '@material-ui/core/TableCell';
 import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,3 +26,13 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
 }));
+
+export const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.success.main,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);

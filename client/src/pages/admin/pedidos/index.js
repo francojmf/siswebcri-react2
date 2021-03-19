@@ -14,11 +14,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AddIcon from '@material-ui/icons/Add';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
-import { withStyles } from '@material-ui/core/styles';
 import api from '../../../services/api';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-import { useStyles } from '../../../functions/use_styles';
+import ClearIcon from '@material-ui/icons/Clear';
+import { useStyles, StyledTableCell } from '../../../functions/use_styles';
 
 export default function PedidosListagem() {
   const classes = useStyles();
@@ -26,16 +26,6 @@ export default function PedidosListagem() {
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [entidades, setEntidades] = useState('');
-
-  const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.success.main,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
 
   useEffect(() => {
     async function loadPedidos() {
@@ -61,7 +51,7 @@ export default function PedidosListagem() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - PEDIDOS'} />
+      <MenuAdmin title={'Sis Web CRI - Meus Pedidos'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -129,6 +119,13 @@ export default function PedidosListagem() {
                                     >
                                       <AutorenewIcon /> Atualizar
                                     </Button>
+                                    <Button
+                                      variant="contained"
+                                      color="secondary"
+                                      onClick={() => handleDelete(item._id)}
+                                    >
+                                      <ClearIcon />
+                                    </Button>
                                   </ButtonGroup>
                                 </TableCell>
                               </TableRow>
@@ -146,7 +143,7 @@ export default function PedidosListagem() {
                         style={({ marginBottom: 10 }, { marginLeft: 10 })}
                         variant="contained"
                         color="success"
-                        href={'/admin/entidades/cadastrar'}
+                        href={'/client/entidades/cadastrar'}
                       >
                         <AddIcon />
                         Cadastrar Entidade
@@ -155,7 +152,7 @@ export default function PedidosListagem() {
                         style={({ marginBottom: 10 }, { marginLeft: 10 })}
                         variant="contained"
                         color="success"
-                        href={'/admin/pedidos/cadastrar'}
+                        href={'/client/pedidos/cadastrar'}
                       >
                         <AddIcon />
                         Iniciar Pedido

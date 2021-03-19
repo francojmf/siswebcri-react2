@@ -4,53 +4,56 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import MenuAdmin from '../../../components/menu-admin';
+import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
-import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
 import { useStyles } from '../../../functions/use_styles';
 
-export default function PedidoEditar() {
+export default function UsuarioEditar() {
   const classes = useStyles();
 
   const [nome, setNome] = useState('');
-  const [descricao, setDescricao] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmaSenha, setConfirmaSenha] = useState('');
   const [tipo, setTipo] = useState('');
-  const [qtd, setQtd] = useState('');
 
-  const { idProduto } = useParams();
+  const { idUsuario } = useParams();
 
   useEffect(() => {
-    async function getProduto() {
-      var response = await api.get('/api/produtos.details/' + idProduto);
-      setNome(response.data.nome_produto);
-      setDescricao(response.data.descricao_produto);
-      setTipo(response.data.tipo_produto);
-      setQtd(response.data.qtd_produto);
+    async function getUsuario() {
+      var response = await api.get('/api/usuarios.details/' + idUsuario);
+      setNome(response.data.nome_usuario);
+      setEmail(response.data.email_usuario);
+      setSenha(response.data.senha_usuario);
+      setTipo(response.data.tipo_usuario);
     }
-    getProduto();
-  });
+
+    getUsuario();
+  }, []);
 
   async function handleSubmit() {
     const data = {
-      nome_produto: nome,
-      descricao_produto: descricao,
-      tipo_produto: tipo,
-      qtd_produto: qtd,
-      _id: idProduto,
+      nome_usuario: nome,
+      email_usuario: email,
+      senha_usuario: senha,
+      tipo_usuario: tipo,
+      _id: idUsuario,
     };
 
-    if (nome !== '' && descricao !== '' && tipo !== '' && qtd !== '') {
-      const response = await api.post('/api/produtos', data);
-
+    if (nome !== '' && email !== '' && senha !== '' && tipo !== '') {
+      const response = await api.put('/api/usuarios/', data);
+      if (senha !== confirmaSenha) {
+        alert('Senhas não estão iguais');
+      }
       if (response.status === 200) {
-        window.location.href = '/admin/produtos';
+        window.location.href = '/usuario';
       } else {
-        alert('Erro ao atualizar o produto!');
+        alert('Erro ao atualizar o usuário!');
       }
     } else {
       alert('Por favor, preencha todos os dados!');
@@ -59,38 +62,29 @@ export default function PedidoEditar() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
+      <MenuUsuario title={'Sis Web CRI - MEU USUÁRIO'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item sm={12}>
               <Button
-                style={{ marginBottom: 30 }}
+                style={{ marginBottom: 20, marginRight: 5 }}
                 variant="contained"
-                color="success"
-                href={'/admin/produtos'}
+                href={'/usuario'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>
-              <Button
-                style={{ marginBottom: 10 }}
-                variant="contained"
-                color="primary"
-                href={'/admin/produtosos/cadastrar'}
-              >
-                <AddIcon />
-                Cadastrar
-              </Button>
+
               <Paper className={classes.paper}>
-                <h2>Atualização de Produtos</h2>
+                <h2>Atualizar dados de Usuário</h2>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12}>
                     <TextField
                       required
                       id="nome"
                       name="nome"
-                      label="Nome do Produto"
+                      label="Nome completo"
                       fullWidth
                       autoComplete="nome"
                       value={nome}
@@ -100,39 +94,39 @@ export default function PedidoEditar() {
                   <Grid item xs={12} sm={6}>
                     <TextField
                       required
-                      id="descricao"
-                      name="descricao"
-                      label="Descrição do produto"
+                      id="email"
+                      name="email"
+                      label="Email"
                       fullWidth
-                      autoComplete="nome"
-                      value={descricao}
-                      onChange={(e) => setDescricao(e.target.value)}
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      type="name"
+                      type="password"
                       required
-                      id="tipo"
-                      name="tipo"
-                      label="Tipo"
+                      id="senha"
+                      name="senha"
+                      label="Nova Senha"
                       fullWidth
-                      autoComplete="tipo"
-                      value={tipo}
-                      onChange={(e) => setTipo(e.target.value)}
+                      autoComplete="senha"
+                      value={senha}
+                      onChange={(e) => setSenha(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      type="number"
+                      type="password"
                       required
-                      id="qtd"
-                      name="qtd"
-                      label="Quantidade"
+                      id="confirmaSenha"
+                      name="confirmaSenha"
+                      label="Repita a Senha"
                       fullWidth
-                      autoComplete="qtd"
-                      value={qtd}
-                      onChange={(e) => setQtd(e.target.value)}
+                      autoComplete="confirmaSenha"
+                      value={confirmaSenha}
+                      onChange={(e) => setConfirmaSenha(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12}>

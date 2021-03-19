@@ -11,7 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
-import { getNomeUsuario, getIdUsuario } from '../../../../src/services/auth';
+import { getIdUsuario } from '../../../../src/services/auth';
 
 export default function EntidadeCadastrar() {
   const classes = useStyles();

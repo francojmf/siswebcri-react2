@@ -20,7 +20,7 @@ import { getNomeTipo, getNomeTipoLabel } from '../../../functions/static_data';
 import AddIcon from '@material-ui/icons/Add';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import ClearIcon from '@material-ui/icons/Clear';
-import { useStyles } from '../../../functions/use_styles';
+import { useStyles, StyledTableCell } from '../../../functions/use_styles';
 
 export default function UsuariosListagem() {
   const classes = useStyles();
@@ -84,13 +84,19 @@ export default function UsuariosListagem() {
                         >
                           <TableHead>
                             <TableRow>
-                              <TableCell>Nome</TableCell>
-                              <TableCell align="center">Email</TableCell>
-                              <TableCell align="center">Tipo</TableCell>
-                              <TableCell align="center">
+                              <StyledTableCell>Nome</StyledTableCell>
+                              <StyledTableCell align="center">
+                                Email
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Tipo
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
                                 Data de Cadastro
-                              </TableCell>
-                              <TableCell align="right">Opções</TableCell>
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                Opções
+                              </StyledTableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>

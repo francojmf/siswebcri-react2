@@ -14,11 +14,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AddIcon from '@material-ui/icons/Add';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
-import { withStyles } from '@material-ui/core/styles';
 import api from '../../../services/api';
 import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
-import { useStyles } from '../../../functions/use_styles';
+import { getIdUsuario } from '../../../../src/services/auth';
+import { useStyles, StyledTableCell } from '../../../functions/use_styles';
 
 export default function PedidosListagem() {
   const classes = useStyles();
@@ -26,16 +26,7 @@ export default function PedidosListagem() {
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [entidades, setEntidades] = useState('');
-
-  const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.success.main,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
+  const idUsuario = getIdUsuario();
 
   useEffect(() => {
     async function loadPedidos() {
@@ -102,37 +93,41 @@ export default function PedidosListagem() {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {entidades.map((item) => (
-                              <TableRow key={item._id}>
-                                <TableCell component="th" scope="row">
-                                  {item.nome_entidade}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                  {item.cpf_cnpj}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.logradouro}, {item.numero} -
-                                  {item.complemento}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.cidade} - {item.estado}
-                                </TableCell>
-                                <TableCell align="center">{item.cep}</TableCell>
-                                <TableCell align="right">
-                                  <ButtonGroup aria-label="outlined success button group">
-                                    <Button
-                                      variant="contained"
-                                      style={{ color: 'green' }}
-                                      href={
-                                        '/client/entidades/editar/' + item._id
-                                      }
-                                    >
-                                      <AutorenewIcon /> Atualizar
-                                    </Button>
-                                  </ButtonGroup>
-                                </TableCell>
-                              </TableRow>
-                            ))}
+                            {entidades
+                              .filter((item) => item.user === idUsuario)
+                              .map((item) => (
+                                <TableRow key={item._id}>
+                                  <TableCell component="th" scope="row">
+                                    {item.nome_entidade}
+                                  </TableCell>
+                                  <TableCell component="th" scope="row">
+                                    {item.cpf_cnpj}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.logradouro}, {item.numero} -
+                                    {item.complemento}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.cidade} - {item.estado}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.cep}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    <ButtonGroup aria-label="outlined success button group">
+                                      <Button
+                                        variant="contained"
+                                        style={{ color: 'green' }}
+                                        href={
+                                          '/client/entidades/editar/' + item._id
+                                        }
+                                      >
+                                        <AutorenewIcon /> Atualizar
+                                      </Button>
+                                    </ButtonGroup>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
                           </TableBody>
                         </Table>
                       )}
@@ -195,58 +190,60 @@ export default function PedidosListagem() {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {pedidos.map((item) => (
-                              <TableRow key={item._id}>
-                                <TableCell component="th" scope="row">
-                                  {item._id.substr(20, 4)}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.nome_pessoa}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.idade_pessoa}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.aprovado_pedido ? (
-                                    <i
-                                      className="fas fa-check"
-                                      style={{ color: 'green' }}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="fas fa-times"
-                                      style={{ color: 'red' }}
-                                    ></i>
-                                  )}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.enviado_pedido ? (
-                                    <i
-                                      className="fas fa-check"
-                                      style={{ color: 'green' }}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="fas fa-times"
-                                      style={{ color: 'red' }}
-                                    ></i>
-                                  )}
-                                </TableCell>
-                                <TableCell align="right">
-                                  <ButtonGroup aria-label="outlined success button group">
-                                    <Button
-                                      variant="contained"
-                                      style={{ color: 'green' }}
-                                      href={
-                                        '/client/pedidos/editar/' + item._id
-                                      }
-                                    >
-                                      <AutorenewIcon /> Atualizar
-                                    </Button>
-                                  </ButtonGroup>
-                                </TableCell>
-                              </TableRow>
-                            ))}
+                            {pedidos
+                              .filter((item) => item.user === idUsuario)
+                              .map((item) => (
+                                <TableRow key={item._id}>
+                                  <TableCell component="th" scope="row">
+                                    {item._id.substr(20, 4)}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.nome_pessoa}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.idade_pessoa}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.aprovado_pedido ? (
+                                      <i
+                                        className="fas fa-check"
+                                        style={{ color: 'green' }}
+                                      ></i>
+                                    ) : (
+                                      <i
+                                        className="fas fa-times"
+                                        style={{ color: 'red' }}
+                                      ></i>
+                                    )}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.enviado_pedido ? (
+                                      <i
+                                        className="fas fa-check"
+                                        style={{ color: 'green' }}
+                                      ></i>
+                                    ) : (
+                                      <i
+                                        className="fas fa-times"
+                                        style={{ color: 'red' }}
+                                      ></i>
+                                    )}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    <ButtonGroup aria-label="outlined success button group">
+                                      <Button
+                                        variant="contained"
+                                        style={{ color: 'green' }}
+                                        href={
+                                          '/client/pedidos/editar/' + item._id
+                                        }
+                                      >
+                                        <AutorenewIcon /> Atualizar
+                                      </Button>
+                                    </ButtonGroup>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
                           </TableBody>
                         </Table>
                       )}

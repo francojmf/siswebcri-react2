@@ -18,20 +18,10 @@ import ClearIcon from '@material-ui/icons/Clear';
 import api from '../../../services/api';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-import { useStyles } from '../../../functions/use_styles';
-import { withStyles } from '@material-ui/core/styles';
+import { useStyles, StyledTableCell } from '../../../functions/use_styles';
 
 export default function EntidadesListagem() {
   const classes = useStyles();
-  const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.success.main,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
 
   const [entidades, setEntidades] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -71,7 +61,7 @@ export default function EntidadesListagem() {
                 href={'/admin/entidades/cadastrar'}
               >
                 <AddIcon />
-                Cadastrar
+                Cadastrar Entidade
               </Button>
               <Paper className={classes.paper}>
                 <h2>Listagem de entidades</h2>
@@ -150,6 +140,15 @@ export default function EntidadesListagem() {
                         </Table>
                       )}
                     </TableContainer>
+                    <p>
+                      Ao clicar em ATUALIZAR aparecerão os demais campos que se
+                      pode editar.
+                    </p>
+
+                    <p>
+                      Somente delete uma Entidade se tiver certeza do que está
+                      fazendo.
+                    </p>
                   </Grid>
                 </Grid>
               </Paper>

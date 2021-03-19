@@ -23,7 +23,7 @@ export const mainListItems = (
     <ListItem
       button
       component="a"
-      href={'/admin/usuario/editar/' + getIdUsuario()}
+      href={'/client/usuario/editar/' + getIdUsuario()}
     >
       <ListItemIcon>
         <PersonIcon style={{ color: 'green' }} />

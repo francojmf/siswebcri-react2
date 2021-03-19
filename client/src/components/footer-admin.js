@@ -7,10 +7,7 @@ export default function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="javascript:;">
-        UNIFESP
-      </Link>{' '}
-      {new Date().getFullYear()}
+      <Link color="inherit">UNIFESP</Link> {new Date().getFullYear()}
       {'.'}
     </Typography>
   );

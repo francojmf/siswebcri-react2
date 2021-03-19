@@ -18,11 +18,10 @@ import ClearIcon from '@material-ui/icons/Clear';
 import api from '../../../services/api';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-import { useStyles } from '../../../functions/use_styles';
+import { useStyles, StyledTableCell } from '../../../functions/use_styles';
 
 export default function ProdutosListagem() {
   const classes = useStyles();
-
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +60,7 @@ export default function ProdutosListagem() {
                 href={'/admin/produtos/cadastrar'}
               >
                 <AddIcon />
-                Cadastrar
+                Cadastrar Produto
               </Button>
               <Paper className={classes.paper}>
                 <h2>Listagem de Produtos</h2>
@@ -79,16 +78,22 @@ export default function ProdutosListagem() {
                         >
                           <TableHead>
                             <TableRow>
-                              <TableCell>Nome</TableCell>
-                              <TableCell align="center">Descrição</TableCell>
-                              <TableCell align="center">Tipo</TableCell>
-                              <TableCell align="center">
+                              <StyledTableCell>Nome</StyledTableCell>
+                              <StyledTableCell align="center">
+                                Descrição
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Tipo
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
                                 Qtd Disponível
-                              </TableCell>
-                              <TableCell align="center">
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
                                 Data de Cadastro
-                              </TableCell>
-                              <TableCell align="right">Opções</TableCell>
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                Opções
+                              </StyledTableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
@@ -137,6 +142,14 @@ export default function ProdutosListagem() {
                     </TableContainer>
                   </Grid>
                 </Grid>
+                <p>
+                  Ao clicar em ATUALIZAR aparecerão os demais campos que se pode
+                  editar.
+                </p>
+                <p>
+                  Somente delete um Produto se tiver certeza do que está
+                  fazendo.
+                </p>
               </Paper>
             </Grid>
           </Grid>
