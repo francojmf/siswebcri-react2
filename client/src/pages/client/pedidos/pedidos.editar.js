@@ -77,7 +77,7 @@ export default function PedidoEditar() {
                 style={{ marginBottom: 10 }}
                 variant="contained"
                 color="primary"
-                href={'/admin/produtosos/cadastrar'}
+                href={'/admin/produtos/cadastrar'}
               >
                 <AddIcon />
                 Cadastrar
@@ -85,7 +85,7 @@ export default function PedidoEditar() {
               <Paper className={classes.paper}>
                 <h2>Atualização de Produtos</h2>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={12}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       required
                       id="nome"

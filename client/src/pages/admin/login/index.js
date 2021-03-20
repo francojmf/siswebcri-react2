@@ -19,6 +19,10 @@ import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuLogin from '../../../components/menu-login';
 import api from '../../../services/api';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import PersonIcon from '@material-ui/icons/Person';
 
 import {
   setNomeUsuario,
@@ -156,10 +160,12 @@ export default function SignIn() {
                 {loading ? <CircularProgress /> : 'ENTRAR'}
               </Button>
               <div>
-                Não Cadastrado?
-                <Button component={Link} to="/usuarioNovo" color="success">
-                  Novo Cadastro
-                </Button>
+                <ListItem button component="a" href={'/usuario/cadastrar'}>
+                  <ListItemIcon>
+                    <PersonIcon style={{ color: 'green' }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Cadastrar Novo Usuário" />
+                </ListItem>
               </div>
             </div>
             <Box mt={8}>

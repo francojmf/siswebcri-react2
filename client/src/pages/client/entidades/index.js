@@ -31,8 +31,6 @@ export default function EntidadesListagem() {
     async function loadEntidades() {
       const response = await api.get('/api/entidades');
       setEntidades(response.data);
-      //     console.log(response.data);
-      //     console.log(idUsuario);
       setLoading(false);
     }
     loadEntidades();

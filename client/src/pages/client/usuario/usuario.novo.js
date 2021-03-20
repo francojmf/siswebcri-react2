@@ -16,7 +16,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
 
-export default function UsuarioCadastrar() {
+export default function UsuarioNovo() {
   const classes = useStyles();
 
   const [nome, setNome] = useState('');
@@ -52,16 +52,16 @@ export default function UsuarioCadastrar() {
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item sm={12}>
+            <Grid item sm={12} style={{ marginBottom: '50px' }}>
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
-                href={'/'}
+                href={'/admin/usuarios'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>
-              <Paper className={classes.paper}>
+              <Paper className={classes.paper} style={{ marginBottom: '20px' }}>
                 <h2>Cadastro de Usuários</h2>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12}>
