@@ -22,6 +22,8 @@ import UsuarioEditar from './pages/client/usuario/usuario.editar';
 import PrivateRoute from './services/wAuth';
 import MinhaEntidade from './pages/client/entidades';
 import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
+import AppCEP from './pages/client/produtos/appCep';
+import BuscaCEP from './pages/client/produtos/buscaCEP';
 import MeusPedidos from './pages/client/pedidos';
 import PedidoCadastrar from './pages/client/pedidos/pedidos.cadastrar';
 import PedidoEditar from './pages/client/pedidos/pedidos.editar';
@@ -38,6 +40,8 @@ export default function Routes() {
         <Route path="/usuario/cadastrar" exact component={UsuarioNovo} />
         <Route path="/client/pedidos/" exact component={MeusPedidos} />
         <Route path="/client/entidades/" exact component={MinhaEntidade} />
+        <Route path="/client/produtos/appCep" exact component={AppCEP} />
+        <Route path="/client/produtos/buscaCEP" exact component={BuscaCEP} />
         <PrivateRoute path="/usuario" exact component={Dashboard} />
         <PrivateRoute
           path="/usuario/editar/:idUsuario"

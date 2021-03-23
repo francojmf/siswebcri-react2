@@ -14,7 +14,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AddIcon from '@material-ui/icons/Add';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
-import ClearIcon from '@material-ui/icons/Clear';
 import api from '../../../services/api';
 import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
@@ -36,17 +35,6 @@ export default function EntidadesListagem() {
     loadEntidades();
   }, []);
 
-  async function handleDelete(id) {
-    if (window.confirm('Deseja realmente excluir esta Entidade?')) {
-      var result = await api.delete('/admin/entidades/' + id);
-      if (result.status === 200) {
-        window.location.href = '/admin/entidades';
-      } else {
-        alert('Ocorreu um erro. Por favor, tente novamente!');
-      }
-    }
-  }
-
   return (
     <div className={classes.root}>
       <MenuUsuario title={'Sis Web CRI - ENTIDADES'} />
@@ -59,7 +47,7 @@ export default function EntidadesListagem() {
                 style={{ marginBottom: 10 }}
                 variant="contained"
                 color="success"
-                href={'/admin/entidades/cadastrar'}
+                href={'/client/entidades/cadastrar'}
               >
                 <AddIcon />
                 Cadastrar Entidade
@@ -130,13 +118,6 @@ export default function EntidadesListagem() {
                                       >
                                         <AutorenewIcon /> Atualizar
                                       </Button>
-                                      <Button
-                                        variant="contained"
-                                        color="secondary"
-                                        onClick={() => handleDelete(item._id)}
-                                      >
-                                        <ClearIcon />
-                                      </Button>
                                     </ButtonGroup>
                                   </TableCell>
                                 </TableRow>
@@ -148,11 +129,6 @@ export default function EntidadesListagem() {
                     <p>
                       Ao clicar em ATUALIZAR aparecerão os demais campos que se
                       pode editar.
-                    </p>
-
-                    <p>
-                      Somente delete uma Entidade se tiver certeza do que está
-                      fazendo.
                     </p>
                   </Grid>
                 </Grid>

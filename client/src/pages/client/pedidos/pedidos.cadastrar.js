@@ -13,9 +13,6 @@ import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
 import { getIdUsuario } from '../../../../src/services/auth';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
 
 export default function PedidoCadastrar() {
   const classes = useStyles();
@@ -34,15 +31,37 @@ export default function PedidoCadastrar() {
     async function loadEntidades() {
       const response = await api.get('/api/entidades');
       setEntidades(response.data);
-      const response2 = await api.get('/api/usuarios.details/' + idUsuario);
-      setUsuario(response2.data.nome_usuario);
-      const response3 = await api.get('/api/produtos');
-      setProduto(response3.data);
       setLoading(false);
     }
     loadEntidades();
   }, []);
-
+  useEffect(() => {
+    async function loadUsuario() {
+      const response = await api.get('/api/usuarios.details/' + idUsuario);
+      setUsuario(response.data.nome_usuario);
+    }
+    loadUsuario();
+  }, []);
+  useEffect(() => {
+    async function loadProduto() {
+      const response = await api.get('/api/produtos');
+      setProduto(response.data);
+    }
+    loadProduto();
+  }, []);
+  /*
+  useEffect(() => {
+    async function loadProdutoId() {
+      const response = await api.get('/api/produtos');
+      setProdutoId(
+        response.data.map((produtos) => {
+          return produtos._id;
+        })
+      );
+    }
+    loadProdutoId();
+  }, []);
+*/
   async function handleSubmit() {
     const data = {
       user: idUsuario,
@@ -53,9 +72,9 @@ export default function PedidoCadastrar() {
       med_a: medA,
     };
     console.log(idUsuario);
-    console.log(pessoa);
     console.log(produtoId);
     console.log(entidadeId);
+
     if (pessoa !== '' && idade !== '' && medA !== '') {
       const response = await api.post('/api/pedidos', data);
       if (response.status === 200) {
@@ -118,12 +137,12 @@ export default function PedidoCadastrar() {
                             key={item._id}
                             type="name"
                             id="entidadeId"
-                            name="entidadeId"
-                            label="Entidade"
-                            fullWidth
-                            autoComplete="entidades"
-                            value={item.nome_entidade}
-                            onChange={(e) => setEntidadeId(e.target.key)}
+                            name="Entidade"
+                            label={item.nome_entidade}
+                            placeholder={item._id}
+                            multiline
+                            //    variant="outlined"
+                            onLoad={(e) => setEntidadeId(e.target.placeholder)}
                           />
                         ))}
                     </Grid>
@@ -139,12 +158,12 @@ export default function PedidoCadastrar() {
                           key={item._id}
                           type="name"
                           id="produtoId"
-                          name="produtoId"
-                          label="Produto"
-                          fullWidth
-                          autoComplete="produtos"
-                          value={item.nome_produto}
-                          onChange={(e) => setProdutoId(e.target.key)}
+                          name="Produto"
+                          label={item.nome_produto}
+                          placeholder={item._id}
+                          multiline
+                          //    variant="outlined"
+                          onLoad={(e) => setProdutoId(e.target.placeholder)}
                         />
                       ))}
                     </Grid>
@@ -154,11 +173,11 @@ export default function PedidoCadastrar() {
                       type="name"
                       id="usuario"
                       name="usuario"
-                      label="Usuario"
-                      fullWidth
-                      autoComplete="usuario"
-                      value={usuario}
-                      onChange={(e) => setUsuario(e.target.value)}
+                      label={usuario}
+                      placeholder={idUsuario}
+                      multiline
+                      //    variant="outlined"
+                      onLoad={(e) => setUsuario(e.target.placeholder)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={2}>

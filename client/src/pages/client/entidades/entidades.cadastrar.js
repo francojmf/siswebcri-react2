@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
@@ -24,8 +25,46 @@ export default function EntidadeCadastrar() {
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
   const [cep, setCep] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [estado, setEstado] = useState('');
+  const [cidade, setCidade] = React.useState('');
+  const [estado, setEstado] = React.useState('SP');
+  const [uf, setUf] = React.useState('SP');
+  const [listUf, setListUf] = React.useState([]);
+  // const [city, setCity] = React.useState('');
+  const [listCity, setListCity] = React.useState([]);
+  // console.log(uf);
+  // console.log(estado);
+  // console.log(cidade);
+
+  function loadUf() {
+    let url = 'https://servicodados.ibge.gov.br/';
+    url = url + 'api/v1/localidades/estados';
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        data.sort((b, a) => a.nome.localeCompare(b.nome));
+        setListUf([...data]);
+      });
+  }
+
+  function loadCity(id) {
+    let url = 'https://servicodados.ibge.gov.br/api/v1/';
+    url = url + `localidades/estados/${id}/municipios`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        data.sort((a, b) => a.nome.localeCompare(b.nome));
+        setListCity([...data]);
+      });
+  }
+
+  React.useEffect(() => {
+    loadUf();
+  }, []);
+  React.useEffect(() => {
+    if (uf) {
+      loadCity(uf);
+    }
+  }, [uf]);
 
   async function handleSubmit() {
     const data = {
@@ -54,7 +93,7 @@ export default function EntidadeCadastrar() {
     ) {
       const response = await api.post('/api/entidades', data);
       if (response.status === 200) {
-        window.location.href = '/client/entidades';
+        window.location.href = '/client/pedidos';
       } else {
         alert('Erro ao cadastrar a entidade!');
       }
@@ -155,30 +194,36 @@ export default function EntidadeCadastrar() {
                       onChange={(e) => setCep(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={5}>
-                    <TextField
-                      required
-                      type="name"
-                      id="cidade"
-                      name="cidade"
-                      label="Cidade"
-                      fullWidth
+                  <Grid item xs={12} sm={3}>
+                    <label> Estado: </label>
+                    <p></p>
+
+                    <select
+                      value={uf}
+                      onChange={(e) => setEstado(e.target.name)}
+                      onChange={(e) => setUf(e.target.value)}
+                    >
+                      {listUf.map((a, b) => (
+                        <option name={a.sigla} value={a.id}>
+                          {a.sigla} - {a.nome}
+                        </option>
+                      ))}
+                    </select>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <label> Cidade: </label>
+                    <p></p>
+                    <select
+                      height="50px"
                       value={cidade}
                       onChange={(e) => setCidade(e.target.value)}
-                    />
+                    >
+                      {listCity.map((a, b) => (
+                        <option value={a.nome}>{a.nome}</option>
+                      ))}
+                    </select>
                   </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      type="name"
-                      id="estado"
-                      name="estado"
-                      label="Estado"
-                      fullWidth
-                      value={estado}
-                      onChange={(e) => setEstado(e.target.value)}
-                    />
-                  </Grid>
+
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
