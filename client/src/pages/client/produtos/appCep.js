@@ -1,55 +1,29 @@
-import React, { Component, useState } from 'react';
-import api from './api';
-import TextField from '@material-ui/core/TextField';
+import './App.css';
+import React from 'react';
+import Form from './components/form';
+import MenuLogin from '../../../components/menu-login';
+import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+//import Modal from './components/modal/modal';
 
-class AppCep extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { cep: '', endereco: {} };
-  }
-  pesquisarCep = (e) => {
-    e.preventDefault();
-    api
-      .get(this.state.cep + '/json')
-      .then((data) => this.setState({ endereco: data.data }));
-  };
-
-  salvaCep = (e) => {
-    console.log('foi digitado');
-    this.setState({ cep: e.target.value });
-  };
-
-  render() {
-    const { endereco } = this.state;
-
-    return (
-      <div className="App">
-        <form>
-          <input
-            type="text"
-            value={this.state.cep}
-            onChange={this.salvaCep}
-          ></input>
-          <button onClick={this.pesquisarCep}>Pesquisar</button>
-        </form>
-        <div>
-          <ul>
-            <li>Cep: {endereco.cep}</li>
-            <li>Logradouro: {endereco.logradouro}</li>
-            <li>Complemento: {endereco.complemento}</li>
-            <li>Bairro: {endereco.bairro}</li>
-            <li>Cidade: {endereco.localidade}</li>
-            <li>Estado: {endereco.uf}</li>
-            <li>Ibge: {endereco.ibge}</li>
-            <li>Gia: {endereco.gia}</li>
-            <li>DDD: {endereco.ddd}</li>
-            <li>Siafi: {endereco.siafi}</li>
-          </ul>
-        </div>
-        <div></div>
+function App() {
+  return (
+    <div className="App">
+      <MenuLogin title={'Sis Web CRI - Consulta CEP'} />
+      <div className="container">
+        <Button
+          style={{ marginBottom: 10 }}
+          variant="contained"
+          color="success"
+          href={'/client/entidades/cadastrar'}
+        >
+          <ArrowBackIcon />
+          Voltar
+        </Button>
+        <Form></Form>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default AppCep;
+export default App;

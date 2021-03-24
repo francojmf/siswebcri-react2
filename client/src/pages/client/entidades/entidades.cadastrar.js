@@ -31,9 +31,9 @@ export default function EntidadeCadastrar() {
   const [listUf, setListUf] = React.useState([]);
   // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
-  // console.log(uf);
-  // console.log(estado);
-  // console.log(cidade);
+  console.log(uf);
+  console.log(estado);
+  console.log(cidade);
 
   function loadUf() {
     let url = 'https://servicodados.ibge.gov.br/';
@@ -41,7 +41,7 @@ export default function EntidadeCadastrar() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        data.sort((b, a) => a.nome.localeCompare(b.nome));
+        data.sort((a, b) => a.nome.localeCompare(b.nome));
         setListUf([...data]);
       });
   }
@@ -117,6 +117,14 @@ export default function EntidadeCadastrar() {
                 href={'/client/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
+              </Button>
+              <Button
+                style={{ marginBottom: 30 }}
+                variant="contained"
+                color="success"
+                href={'/client/produtos/appCep'}
+              >
+                Busca CEP com Logradouro
               </Button>
               <Paper className={classes.paper}>
                 <h2>Cadastro de Nova Entidade</h2>
@@ -195,10 +203,8 @@ export default function EntidadeCadastrar() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
-                    <label> Estado: </label>
-                    <p></p>
-
-                    <select
+                    <label> Estado : </label>
+                    <Select
                       value={uf}
                       onChange={(e) => setEstado(e.target.name)}
                       onChange={(e) => setUf(e.target.value)}
@@ -208,12 +214,11 @@ export default function EntidadeCadastrar() {
                           {a.sigla} - {a.nome}
                         </option>
                       ))}
-                    </select>
+                    </Select>
                   </Grid>
                   <Grid item xs={12} sm={4}>
-                    <label> Cidade: </label>
-                    <p></p>
-                    <select
+                    <label> Cidade : </label>
+                    <Select
                       height="50px"
                       value={cidade}
                       onChange={(e) => setCidade(e.target.value)}
@@ -221,7 +226,7 @@ export default function EntidadeCadastrar() {
                       {listCity.map((a, b) => (
                         <option value={a.nome}>{a.nome}</option>
                       ))}
-                    </select>
+                    </Select>
                   </Grid>
 
                   <Grid item xs={12} sm={3}>
@@ -257,3 +262,7 @@ export default function EntidadeCadastrar() {
     </div>
   );
 }
+
+/*
+
+*/
