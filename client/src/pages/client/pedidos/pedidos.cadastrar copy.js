@@ -4,11 +4,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
@@ -28,6 +23,14 @@ export default function PedidoCadastrar() {
   // const [usuario, setUsuario] = useState('');
   const [pessoa, setPessoa] = useState('');
   const [idade, setIdade] = useState('');
+  const [entidades, setEntidades] = React.useState([]);
+  const [entidadeId, setEntidadeId] = React.useState('');
+
+  const [cidade, setCidade] = React.useState('');
+  const [estado, setEstado] = React.useState('SP');
+  const [uf, setUf] = React.useState('SP');
+  const [listUf, setListUf] = React.useState([]);
+
   const [medA, setMedA] = useState('');
   const [medB, setMedB] = useState('');
   const [medC, setMedC] = useState('');
@@ -36,31 +39,7 @@ export default function PedidoCadastrar() {
   const [medF, setMedF] = useState('');
 
   const [produtos, setProdutos] = useState([]);
-  const [produtoId, setProdutoId] = useState('');
-  const [prodNome, setProdNome] = useState('');
-  const [entidades, setEntidades] = useState([]);
-  const [entidadeId, setEntidadeId] = useState('');
-  const [entiNome, setEntiNome] = useState('');
-
-  const handleChange = (event) => {
-    setEntidadeId(event.target.value);
-    setEntiNome(event.target.name);
-  };
-  const handleChange2 = (event) => {
-    setProdutoId(event.target.value);
-  };
-  // const handleChange3 = (event) => {
-  //   setProdNome(event.target.name);
-  // };
-
-  useEffect(() => {
-    async function loadEntidades() {
-      const response = await api.get('/api/entidades');
-      setEntidades(response.data);
-      //  setLoading(false);
-    }
-    loadEntidades();
-  }, []);
+  const [produtoId, setProdutoId] = React.useState('');
 
   useEffect(() => {
     async function loadProdutos() {
@@ -70,6 +49,27 @@ export default function PedidoCadastrar() {
     }
     loadProdutos();
   }, []);
+
+  function loadEntidades() {
+    const response = api.get('/api/entidades');
+    setEntidades(response.data);
+    //  setLoading(false);
+  }
+  // function loadEntidades() {
+  //   let url = '/api/entidades';
+  //   const response = api.get(url);
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       data.sort((a, b) => a.nome.localeCompare(b.nome));
+  //       setEntidades([...data]);
+  //     });
+  // }
+
+  React.useEffect(() => {
+    loadEntidades();
+  }, []);
+
   console.log(entidades);
   console.log(produtos);
 
@@ -152,48 +152,56 @@ export default function PedidoCadastrar() {
                     </Grid>
 
                     <Grid item xs={12} sm={3}>
-                      <FormControl width="100px">
-                        <InputLabel>Selecione CRI</InputLabel>
-                        <Select
-                          value={produtos}
-                          input={<Input />}
-                          onChange={handleChange2}
-                          //    onClick={handleChange3}
-                          style={{ width: '150px' }}
-                          placeholder="CRI Manual"
-                        >
-                          {produtos.map((item) => (
-                            <MenuItem nane={item.nome_produto} value={item._id}>
-                              {item.nome_produto}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                      <FormControl>
-                        <InputLabel>Selecione Entidade</InputLabel>
-                        <Select
-                          value={entidades}
-                          onChange={handleChange}
-                          // placeholder="CRI Manual"
-                          input={<Input />}
-                          style={{ width: '150px' }}
-                        >
-                          {entidades
-                            .filter((item) => item.user === idUsuario)
-                            .map((item) => (
-                              <MenuItem
-                                key={item.nome_entidade}
-                                value={item._id}
-                              >
-                                {item.nome_entidade}
-                              </MenuItem>
-                            ))}
-                        </Select>
-                      </FormControl>
+                      <label> Selecione CRI : </label>
+
+                      <Select
+                        height="50px"
+                        value={produtos}
+                        onChange={(e) => setProdutoId(e.target.value)}
+                      >
+                        {produtos.map((item) => (
+                          <option
+                            key={item._id}
+                            name={item.nome}
+                            value={item.id}
+                          >
+                            {item.nome}}
+                          </option>
+                        ))}
+                      </Select>
                     </Grid>
 
+                    {/* <Grid item xs={12} sm={3}>
+                    <label> Selecione Entidade : </label>
+                    <Select
+                      value={entidades}
+                      // onChange={(e) => setEstado(e.target.name)}
+                      onChange={(e) => setEntidadeId(e.target.value)}
+                    >
+                      {entidades
+                        .filter((item) => item.user === idUsuario)
+                        .map((item) => (
+                          <option name={item.nome} value={item.id}>
+                            {item.nome}
+                          </option>
+                        ))}
+                    </Select>
+                  </Grid>
+
+                  <Grid item xs={12} sm={3}>
+                    <label> Selecione CRI : </label>
+                    <Select
+                      height="50px"
+                      value={produtos}
+                      onChange={(e) => setProdutoId(e.target.value)}
+                    >
+                      {produtos.map((item) => (
+                        <option name={item.nome} value={item.id}>
+                          {item.nome}}
+                        </option>
+                      ))}
+                    </Select>
+                  </Grid> */}
                     <Grid item xs={12} sm={2}>
                       <TextField
                         required
@@ -304,14 +312,6 @@ export default function PedidoCadastrar() {
 }
 
 /*
-
-      const response = await api.get('/api/produtos');
-      for (let i = 0, l = response.length; i < l; i += 1) {
-        if (response[i].selected) {
-          produtos.push(response[i].value);
-        }
-        setProdutos(produtos);
-      }
                   {loading ? (
                     <LinearProgress
                       style={{ width: '50%', margin: '20px auto' }}
@@ -354,7 +354,6 @@ export default function PedidoCadastrar() {
                       </Select>
                     </Grid>
                   )}
-
 
   useEffect(() => {
     async function loadProdutoId() {

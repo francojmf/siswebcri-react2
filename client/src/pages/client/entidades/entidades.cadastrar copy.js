@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import MenuAdmin from '../../../components/menu-admin';
+import MenuUsuario from '../../../components/menu-usuario';
 import Footer from '../../../components/footer-admin';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -104,7 +104,7 @@ export default function EntidadeCadastrar() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - Nova Entidade'} />
+      <MenuUsuario title={'Sis Web CRI - Nova Entidade'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
@@ -114,7 +114,7 @@ export default function EntidadeCadastrar() {
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
-                href={'/admin/pedidos'}
+                href={'/client/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>

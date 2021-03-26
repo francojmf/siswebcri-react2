@@ -12,6 +12,7 @@ const DataSchema = new mongoose.Schema(
     logradouro: String,
     numero: Number,
     complemento: String,
+    bairro: String,
     cep: String,
     cidade: String,
     estado: String,

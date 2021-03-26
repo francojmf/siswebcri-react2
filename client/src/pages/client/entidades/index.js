@@ -34,6 +34,7 @@ export default function EntidadesListagem() {
     }
     loadEntidades();
   }, []);
+  console.log(entidades);
 
   return (
     <div className={classes.root}>

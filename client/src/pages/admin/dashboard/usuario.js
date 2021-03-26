@@ -30,7 +30,8 @@ export default function Dashboard() {
               <h4>Aviso</h4>
               <p>
                 - Ao realizar o cadastro você estará concordando com os Termos
-                de Uso da UNIFESP.
+                de Uso da UNIFESP. - Os dados informados por você serão mantidos
+                em sigilo, não serão repassados a terceiros.
               </p>
               <AccountBalanceIcon style={{ color: 'green' }} />
               <a href="https://www.unifesp.br/termos-de-uso">

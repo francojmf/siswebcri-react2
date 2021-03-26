@@ -60,11 +60,13 @@ export default function EntidadeCadastrar() {
   React.useEffect(() => {
     loadUf();
   }, []);
+  console.log(listUf);
   React.useEffect(() => {
     if (uf) {
       loadCity(uf);
     }
   }, [uf]);
+  console.log(listCity);
 
   async function handleSubmit() {
     const data = {
@@ -129,7 +131,7 @@ export default function EntidadeCadastrar() {
               <Paper className={classes.paper}>
                 <h2>Cadastro de Nova Entidade</h2>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={7}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       required
                       type="name"
@@ -141,20 +143,31 @@ export default function EntidadeCadastrar() {
                       onChange={(e) => setNome(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={5}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       required
                       type="name"
                       id="cpf_cnpj"
                       name="cpf_cnpj"
-                      label="CNPJ da entidade ou CPF do responsável"
+                      label="CNPJ da entidade ou seu CPF"
                       fullWidth
                       value={cpf_cnpj}
                       onChange={(e) => setCpf(e.target.value)}
                     />
                   </Grid>
-
-                  <Grid item xs={12} sm={7}>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      required
+                      type="name"
+                      id="fone"
+                      name="fone"
+                      label="Telefone de contato"
+                      fullWidth
+                      value={fone}
+                      onChange={(e) => setFone(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={5}>
                     <TextField
                       type="name"
                       required
@@ -178,13 +191,12 @@ export default function EntidadeCadastrar() {
                       onChange={(e) => setNumero(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={7}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
-                      required
                       type="name"
                       id="complemento"
                       name="complemento"
-                      label="Complemento do endereço"
+                      label="Complemento"
                       fullWidth
                       value={complemento}
                       onChange={(e) => setComplemento(e.target.value)}
@@ -194,9 +206,9 @@ export default function EntidadeCadastrar() {
                     <TextField
                       required
                       type="name"
-                      id="cep"
-                      name="cep"
-                      label="CEP do logradouro"
+                      id="bairro"
+                      name="bairro"
+                      label="Bairro"
                       fullWidth
                       value={cep}
                       onChange={(e) => setCep(e.target.value)}
@@ -228,17 +240,16 @@ export default function EntidadeCadastrar() {
                       ))}
                     </Select>
                   </Grid>
-
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
                       type="name"
-                      id="fone"
-                      name="fone"
-                      label="Telefone de contato"
+                      id="cep"
+                      name="cep"
+                      label="CEP do logradouro"
                       fullWidth
-                      value={fone}
-                      onChange={(e) => setFone(e.target.value)}
+                      value={cep}
+                      onChange={(e) => setCep(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -253,6 +264,20 @@ export default function EntidadeCadastrar() {
                 </Grid>
               </Paper>
             </Grid>
+            <p>
+              {' '}
+              - O endereço informado deve ser o mesmo onde deverá ser entregue o
+              kit da cadeira de rodas.
+            </p>
+            <p>
+              {' '}
+              - O kit consiste de um conjunto de peças que serão montadas de
+              acordo com as instruções enviadas junto.
+            </p>
+            <p>
+              - Isto foi feito para facilitar a entrega, mas a maior parte das
+              peças principais estarão montadas.
+            </p>
           </Grid>
           <Box pt={4}>
             <Footer />

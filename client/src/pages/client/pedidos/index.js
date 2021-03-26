@@ -38,6 +38,8 @@ export default function PedidosListagem() {
     }
     loadPedidos();
   }, []);
+  console.log(entidades);
+  console.log(pedidos);
 
   async function handleDelete(id) {
     if (window.confirm('Deseja realmente excluir este pedido?')) {
@@ -137,25 +139,6 @@ export default function PedidosListagem() {
                         Para fazer um pedido é preciso "Cadastrar Entidade" com
                         o endereço de entrega, caso ainda não tenha feito isto.
                       </p>
-                      <Button
-                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                        variant="contained"
-                        color="success"
-                        href={'/client/entidades/cadastrar'}
-                      >
-                        <AddIcon />
-                        Cadastrar Entidade
-                      </Button>
-                      <Button
-                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                        variant="contained"
-                        color="success"
-                        href={'/client/pedidos/cadastrar'}
-                      >
-                        <AddIcon />
-                        Iniciar Pedido
-                      </Button>
-                      <p></p>
                     </div>
 
                     <TableContainer component={Paper}>
@@ -248,12 +231,27 @@ export default function PedidosListagem() {
                         </Table>
                       )}
                     </TableContainer>
-
                     <div>
-                      <p>
-                        Para fazer um pedido é necessário informar alguns dados
-                        da criaça que receberá a doação.
-                      </p>
+                      <p></p>
+                      <Button
+                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
+                        variant="contained"
+                        color="success"
+                        href={'/client/entidades/cadastrar'}
+                      >
+                        <AddIcon />
+                        Cadastrar Entidade
+                      </Button>
+                      <Button
+                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
+                        variant="contained"
+                        color="success"
+                        href={'/client/pedidos/cadastrar'}
+                      >
+                        <AddIcon />
+                        Iniciar Pedido
+                      </Button>
+                      <p></p>
                       <p>
                         Para iniciar um novo pedido clique em "Iniciar Pedido".
                       </p>
@@ -263,6 +261,18 @@ export default function PedidosListagem() {
                 </Grid>
               </Paper>
             </Grid>
+            <p>
+              - Para fazer um pedido é necessário informar alguns dados da
+              criaça que receberá a doação.
+            </p>
+            <p>
+              - Podem ser feitos pedidos para outras crianças, desde que o
+              endereço de entrega seja o mesmo.
+            </p>
+            <p>
+              - Para entrega em outra cidade, deverá ser informada outra
+              entidade ou pessoa responsável pelo recebimento e montagem do kit.
+            </p>
           </Grid>
           <Box pt={4}>
             <Footer />

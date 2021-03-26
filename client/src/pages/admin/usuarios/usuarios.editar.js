@@ -36,7 +36,6 @@ export default function UsuarioEditar() {
       setSenha(response.data.senha_usuario);
       setTipo(response.data.tipo_usuario);
     }
-
     getUsuario();
   }, []);
 

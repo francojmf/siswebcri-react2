@@ -27,12 +27,11 @@ export default class Form extends Component {
 
   HandleSubmit = async (event) => {
     event.preventDefault();
-
     const response = await apiCep.get('/' + this.state.endereco + '/json');
     this.setState({ data: response.data });
     //this.setListUf({ data: uf2.data });
 
-    //CONDICIONAL PARA IDENTIFICAR MAIS DE UM LOGRADOURO
+    //CONDICIONAL PARA IDENTIFICAR MAIS DE UM LOGRADOURO (MODAL)
     if (this.state.data.length > 1) {
       this.handleShow();
     } else {
@@ -92,13 +91,6 @@ export default class Form extends Component {
           <h5>Insira um Logradouro (ou parte do nome):</h5>
           <div className={styles.fsInputContainer}>
             <Grid item xs={12} sm={12}>
-              {/* Cod.IBGE -
-                <input
-                  name="ibge"
-                  type="text"
-                  placeholder="IBGE"
-                  value={this.state.ibge}
-                /> */}
               Logradouro -
               <input
                 name="adress"
@@ -121,7 +113,7 @@ export default class Form extends Component {
               <Grid item xs={12} sm={12}>
                 Cidade -
                 <input
-                  name="city"
+                  name="cidade"
                   type="text"
                   placeholder="CIDADE"
                   value={this.state.localidade}

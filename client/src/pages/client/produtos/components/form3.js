@@ -1,7 +1,7 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
+//import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+//import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
 
 import Button from '@material-ui/core/Button';
@@ -9,23 +9,26 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 //import SaveIcon from '@material-ui/icons/Save';
 //import api from '../../../services/api';
 import { useStyles } from '../../../../functions/use_styles';
-import styles from '../styles.module.css';
-import Form2 from './form2';
+//import styles from '../styles.module.css';
+//import Form2 from './form2';
 
-export default function Form3() {
+function Form3() {
   const classes = useStyles();
 
-  const [cidade, setCidade] = React.useState('');
-  const [estado, setEstado] = React.useState('');
+  const [cidade, setCidade] = React.useState('Bauru');
+  // const [estado, setEstado] = React.useState('');
   const [uf, setUf] = React.useState('SP');
   const [listUf, setListUf] = React.useState([]);
   // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
   const dados = listUf;
   const dados2 = listCity;
-  console.log(uf);
-  console.log(estado);
-  console.log(cidade);
+  const city = cidade;
+  const uf2 = uf;
+
+  console.log(uf2);
+  // console.log(estado);
+  console.log(city);
 
   function loadUf() {
     let url = 'https://servicodados.ibge.gov.br/';
@@ -68,7 +71,7 @@ export default function Form3() {
               <label> Estado : </label>
               <Select
                 value={uf}
-                onClick={(e) => setEstado(e.target.key)}
+                //  onClick={(e) => setEstado(e.target.key)}
                 onChange={(e) => setUf(e.target.value)}
               >
                 {listUf.map((a, b) => (
@@ -96,6 +99,8 @@ export default function Form3() {
     </div>
   );
 }
+
+export default Form3;
 
 /*
   async function handleSubmit() {
