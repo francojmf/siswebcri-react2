@@ -95,6 +95,7 @@ export default function EntidadeCadastrar() {
     ) {
       const response = await api.post('/api/entidades', data);
       if (response.status === 200) {
+        alert('Entidade cadastrada com sucesso !!');
         window.location.href = '/client/pedidos';
       } else {
         alert('Erro ao cadastrar a entidade!');

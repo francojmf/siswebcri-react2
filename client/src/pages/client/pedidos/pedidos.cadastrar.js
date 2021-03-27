@@ -18,13 +18,11 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
 import { getIdUsuario } from '../../../../src/services/auth';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import ImgMedidas from '../../../assets/img/medidas2.jpg';
 
 export default function PedidoCadastrar() {
   const classes = useStyles();
   const idUsuario = getIdUsuario();
-  const [loading, setLoading] = useState(true);
   // const [usuario, setUsuario] = useState('');
   const [pessoa, setPessoa] = useState('');
   const [idade, setIdade] = useState('');
@@ -44,7 +42,7 @@ export default function PedidoCadastrar() {
 
   const handleChange = (event) => {
     setEntidadeId(event.target.value);
-    setEntiNome(event.target.name);
+    // setEntiNome(event.target.name);
   };
   const handleChange2 = (event) => {
     setProdutoId(event.target.value);
@@ -103,6 +101,7 @@ export default function PedidoCadastrar() {
     ) {
       const response = await api.post('/api/pedidos', data);
       if (response.status === 200) {
+        alert('Pedido cadastrado com sucesso !!');
         window.location.href = '/client/pedidos';
       } else {
         alert('Erro ao cadastrar o pedido!');
@@ -160,7 +159,12 @@ export default function PedidoCadastrar() {
                           onChange={handleChange2}
                           //    onClick={handleChange3}
                           style={{ width: '150px' }}
-                          placeholder="CRI Manual"
+                          renderValue={(selected) => {
+                            if (selected.length !== 0) {
+                              return <em>Selecionada</em>;
+                            }
+                            return <em>Selecione</em>;
+                          }}
                         >
                           {produtos.map((item) => (
                             <MenuItem nane={item.nome_produto} value={item._id}>
@@ -179,6 +183,12 @@ export default function PedidoCadastrar() {
                           // placeholder="CRI Manual"
                           input={<Input />}
                           style={{ width: '150px' }}
+                          renderValue={(selected) => {
+                            if (selected.length !== 0) {
+                              return <em>Selecionada</em>;
+                            }
+                            return <em>Selecione</em>;
+                          }}
                         >
                           {entidades
                             .filter((item) => item.user === idUsuario)

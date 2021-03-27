@@ -39,10 +39,31 @@ export default function PedidosListagem() {
   }, []);
 
   async function handleDelete(id) {
-    if (window.confirm('Deseja realmente excluir este pedido?')) {
-      var result = await api.delete('client/pedidos/' + id);
+    if (
+      window.confirm(
+        'Deseja realmente excluir esta entidade ?' +
+          'Este comando não pode ser desfeito ...'
+      )
+    ) {
+      var result = await api.delete('api/entidades/' + id);
       if (result.status === 200) {
-        window.location.href = '/client/pedidos';
+        window.location.href = '/admin/pedidos';
+      } else {
+        alert('Ocorreu um erro. Por favor, tente novamente!');
+      }
+    }
+  }
+  async function handleDelete2(id) {
+    if (
+      window.confirm(
+        'Deseja realmente excluir este pedido ?' +
+          'Este comando não pode ser desfeito ...' +
+          'Os dados do pedido serão perdidos !!'
+      )
+    ) {
+      var result = await api.delete('api/pedidos/' + id);
+      if (result.status === 200) {
+        window.location.href = '/admin/pedidos';
       } else {
         alert('Ocorreu um erro. Por favor, tente novamente!');
       }
@@ -51,7 +72,7 @@ export default function PedidosListagem() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - Meus Pedidos'} />
+      <MenuAdmin title={'Sis Web CRI - PEDIDOS'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -114,7 +135,7 @@ export default function PedidosListagem() {
                                       variant="contained"
                                       style={{ color: 'green' }}
                                       href={
-                                        '/client/entidades/editar/' + item._id
+                                        '/admin/entidades/editar/' + item._id
                                       }
                                     >
                                       <AutorenewIcon /> Atualizar
@@ -143,7 +164,7 @@ export default function PedidosListagem() {
                         style={({ marginBottom: 10 }, { marginLeft: 10 })}
                         variant="contained"
                         color="success"
-                        href={'/client/entidades/cadastrar'}
+                        href={'/admin/entidades/cadastrar'}
                       >
                         <AddIcon />
                         Cadastrar Entidade
@@ -152,7 +173,7 @@ export default function PedidosListagem() {
                         style={({ marginBottom: 10 }, { marginLeft: 10 })}
                         variant="contained"
                         color="success"
-                        href={'/client/pedidos/cadastrar'}
+                        href={'/admin/pedidos/cadastrar'}
                       >
                         <AddIcon />
                         Iniciar Pedido
@@ -239,6 +260,13 @@ export default function PedidosListagem() {
                                       }
                                     >
                                       <AutorenewIcon /> Atualizar
+                                    </Button>
+                                    <Button
+                                      variant="contained"
+                                      color="secondary"
+                                      onClick={() => handleDelete2(item._id)}
+                                    >
+                                      <ClearIcon />
                                     </Button>
                                   </ButtonGroup>
                                 </TableCell>

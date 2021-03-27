@@ -5,6 +5,7 @@ import Dashboard from './pages/admin/dashboard';
 import Entidades from './pages/admin/entidades';
 import EntidadesCadastrar from './pages/admin/entidades/entidades.cadastrar';
 import Pedidos from './pages/admin/pedidos';
+import PedidosCadastrar from './pages/admin/pedidos/pedidos.cadastrar';
 import PedidosEditar from './pages/admin/pedidos/pedidos.editar';
 import Produtos from './pages/admin/produtos';
 import ProdutoEditar from './pages/admin/produtos/produtos.editar';
@@ -88,6 +89,11 @@ export default function Routes() {
           path="/admin/produtos/editar/:idProduto"
           exact
           component={ProdutoEditar}
+        />
+        <PrivateRoute
+          path="/admin/pedidos/cadastrar"
+          exact
+          component={PedidosCadastrar}
         />
         <PrivateRoute
           path="/admin/pedidos/editar/:idPedido"

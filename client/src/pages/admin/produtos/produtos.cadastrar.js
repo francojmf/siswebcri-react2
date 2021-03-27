@@ -32,6 +32,7 @@ export default function ProdutoCadastrar() {
       const response = await api.post('/api/produtos', data);
 
       if (response.status === 200) {
+        alert('Produto cadastrado com sucesso !!');
         window.location.href = '/admin/produtos';
       } else {
         alert('Erro ao cadastrar o produto!');

@@ -36,6 +36,7 @@ export default function UsuarioCadastrar() {
       const response = await api.post('/api/usuarios', data);
 
       if (response.status === 200) {
+        alert('Usuário cadastrado com sucesso !!');
         window.location.href = '/admin/usuarios';
       } else {
         alert('Erro ao cadastrar o usuário!');
