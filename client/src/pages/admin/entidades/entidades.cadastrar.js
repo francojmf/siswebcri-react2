@@ -13,6 +13,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
 import { getIdUsuario } from '../../../../src/services/auth';
+import { Modal, Table } from 'react-bootstrap';
 
 export default function EntidadeCadastrar() {
   const classes = useStyles();
@@ -31,6 +32,7 @@ export default function EntidadeCadastrar() {
   const [listUf, setListUf] = React.useState([]);
   // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
+
   console.log(uf);
   console.log(estado);
   console.log(cidade);
@@ -125,7 +127,7 @@ export default function EntidadeCadastrar() {
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
-                href={'/client/produtos/appCep'}
+                href={'/admin/entidades/appCep'}
               >
                 Busca CEP com Logradouro
               </Button>

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
@@ -16,14 +14,14 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { useStyles, StyledTableCell } from '../../../functions/use_styles';
+import { useStyles } from '../../../functions/use_styles';
 import { getIdUsuario } from '../../../../src/services/auth';
 import ImgMedidas from '../../../assets/img/medidas2.jpg';
 
 export default function PedidoCadastrar() {
   const classes = useStyles();
   const idUsuario = getIdUsuario();
+  // const [usuario, setUsuario] = useState('');
   const [pessoa, setPessoa] = useState('');
   const [idade, setIdade] = useState('');
   const [medA, setMedA] = useState('');
@@ -33,38 +31,51 @@ export default function PedidoCadastrar() {
   const [medE, setMedE] = useState('');
   const [medF, setMedF] = useState('');
 
-  const [produtos, setProdutos] = useState([]);
-  const [produtoId, setProdutoId] = useState('');
-  const [produtoNome, setProdutoNome] = useState('');
-  const [entidades, setEntidades] = useState([]);
-  const [entidadeId, setEntidadeId] = useState('');
-  const [entidadeNome, setEntidadeNome] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [produtos, setProdutos] = React.useState([]);
+  const [produtoId, setProdutoId] = React.useState('');
+  // const [prodNome, setProdNome] = useState('');
+  const [entidades, setEntidades] = React.useState([]);
+  const [entidadeId, setEntidadeId] = React.useState('');
+  // const [entiNome, setEntiNome] = useState('');
 
-  useEffect(() => {
-    async function loadEntidades() {
-      const response = await api.get('/api/entidades');
-      setEntidades(response.data);
-      setLoading(false);
-    }
-    loadEntidades();
-  }, []);
+  function loadProdutos() {
+    const response = api.get('/api/produtos');
+    produtos = response.data.json();
+    setProdutos(response.data);
+  }
 
-  useEffect(() => {
-    async function loadProdutos() {
-      const response = await api.get('/api/produtos');
-      setProdutos(response.data);
-      setLoading(false);
-    }
+  function loadEntidades() {
+    const response = api.get('/api/entidades');
+    setEntidades(response.data);
+  }
+
+  React.useEffect(() => {
     loadProdutos();
   }, []);
+  console.log(produtos);
 
-  function clickEvent(event, a, b) {}
-  function clickEvent2(event, a, b) {}
+  React.useEffect(() => {
+    loadEntidades();
+  }, []);
+  console.log(entidades);
 
-  console.log(idUsuario);
-  console.log(produtoId);
-  console.log(entidadeId);
+  const handleChange2 = (event) => {
+    setProdutoId(event.target.value);
+  };
+  // const handleChange3 = (event) => {
+  //   setProdNome(event.target.name);
+  // };
+  // function renderEntidadeItem() {
+  //   return entidades.map((item, i) => (
+  //     <MenuItem key={item._id} value={item._id} name={item.nome_entidade}>
+  //       {item.nome_entidade}
+  //     </MenuItem>
+  //   ));
+  // }
+
+  const handleChange = (event) => {
+    setEntidadeId(event.target.value);
+  };
 
   async function handleSubmit() {
     const data = {
@@ -97,7 +108,7 @@ export default function PedidoCadastrar() {
       const response = await api.post('/api/pedidos', data);
       if (response.status === 200) {
         alert('Pedido cadastrado com sucesso !!');
-        window.location.href = '/admin/pedidos';
+        window.location.href = '/client/pedidos';
       } else {
         alert('Erro ao cadastrar o pedido!');
       }
@@ -118,110 +129,6 @@ export default function PedidoCadastrar() {
                 <Paper className={classes.paper}>
                   <h2>Novo Pedido</h2>
                   <Grid container spacing={3}>
-                    <Grid item xs={12} sm={7}>
-                      <TableContainer component={Paper}>
-                        {loading ? (
-                          <LinearProgress
-                            style={{ width: '50%', margin: '20px auto' }}
-                          />
-                        ) : (
-                          <Table
-                            className={classes.table}
-                            aria-label="simple table"
-                          >
-                            <TableHead>
-                              <TableRow>
-                                <StyledTableCell>Nome</StyledTableCell>
-                                <StyledTableCell align="center">
-                                  Descrição
-                                </StyledTableCell>
-
-                                <StyledTableCell align="right">
-                                  Opções
-                                </StyledTableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              {produtos.map((row) => (
-                                <TableRow key={row._id}>
-                                  <TableCell component="th" scope="row">
-                                    {row.nome_produto}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.descricao_produto}
-                                  </TableCell>
-
-                                  <TableCell align="right">
-                                    <Button
-                                      variant="contained"
-                                      style={{ color: 'green' }}
-                                      onClick={(event) =>
-                                        clickEvent(
-                                          event,
-                                          setProdutoId(row._id),
-                                          setProdutoNome(row.nome_produto)
-                                        )
-                                      }
-                                    >
-                                      Selecione
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
-                          </Table>
-                        )}
-                      </TableContainer>
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                      <TableContainer component={Paper}>
-                        {loading ? (
-                          <LinearProgress
-                            style={{ width: '50%', margin: '20px auto' }}
-                          />
-                        ) : (
-                          <Table
-                            className={classes.table}
-                            aria-label="simple table"
-                          >
-                            <TableHead>
-                              <TableRow>
-                                <StyledTableCell>Entidade</StyledTableCell>
-
-                                <StyledTableCell align="right">
-                                  Opções
-                                </StyledTableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              {entidades.map((item) => (
-                                <TableRow key={item._id}>
-                                  <TableCell component="th" scope="row">
-                                    {item.nome_entidade}
-                                  </TableCell>
-
-                                  <TableCell align="right">
-                                    <Button
-                                      variant="contained"
-                                      style={{ color: 'green' }}
-                                      onClick={(event) =>
-                                        clickEvent(
-                                          event,
-                                          setEntidadeId(item._id),
-                                          setEntidadeNome(item.nome_entidade)
-                                        )
-                                      }
-                                    >
-                                      Selecione esta
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
-                          </Table>
-                        )}
-                      </TableContainer>
-                    </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         type="name"
@@ -248,28 +155,52 @@ export default function PedidoCadastrar() {
                         onChange={(e) => setIdade(e.target.value)}
                       />
                     </Grid>
+                    {/* <Grid item xs={12} sm={3}>
+                      <label> Selecione CRI: </label>
+                      <Select value={produtos} onChange={handleChange2}>
+                        {produtos.map((a, b) => (
+                          <option name={a.nome_produto} value={a._id}>
+                            {a.nome_produto}
+                          </option>
+                        ))}
+                      </Select>
+                    </Grid> */}
 
+                    {/* <Grid item xs={12} sm={3}>
+                      <label> Selecione CRI : </label>
+                      <Select
+                        value={produtos}
+                        onChange={(e) => setProdutos(e.target.name)}
+                        onChange={(e) => setProdutoId(e.target.value)}
+                      >
+                        {produtos.map((a, b) => (
+                          <option name={a.nome_produto} value={a.id}>
+                            {a.nome_produto}
+                          </option>
+                        ))}
+                      </Select>
+                    </Grid> */}
                     <Grid item xs={12} sm={3}>
-                      <TextField
-                        type="name"
-                        id="produto"
-                        name="produto"
-                        label="CRI selecionada"
-                        fullWidth
-                        value={produtoNome}
-                        onChange={(e) => setProdutoNome(e.target.value)}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                      <TextField
-                        type="name"
-                        id="entidade"
-                        name="entidade"
-                        label="Entidade selecionada"
-                        fullWidth
-                        value={entidadeNome}
-                        onChange={(e) => setEntidadeNome(e.target.value)}
-                      />
+                      <FormControl>
+                        <InputLabel>Selecione Entidade</InputLabel>
+                        <Select
+                          value={entidades}
+                          onChange={handleChange}
+                          style={{ width: '150px' }}
+                          renderValue={(selected) => {
+                            if (selected.length !== 0) {
+                              return <em>Selecionada</em>;
+                            }
+                            return <em>Selecione</em>;
+                          }}
+                          inputProps={{
+                            name: 'entidade',
+                            id: '_id',
+                          }}
+                        >
+                          {/* {renderEntidadeItem()} */}
+                        </Select>
+                      </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={2}>
                       <TextField
@@ -357,7 +288,7 @@ export default function PedidoCadastrar() {
                         style={{ marginBottom: 30 }}
                         variant="contained"
                         color="success"
-                        href={'/admin/pedidos'}
+                        href={'/client/pedidos'}
                       >
                         <ArrowBackIcon /> Voltar
                       </Button>
@@ -379,3 +310,16 @@ export default function PedidoCadastrar() {
     </>
   );
 }
+
+/*
+  function loadProdutos() {
+    //  const response = api.get('/api/produtos');
+    let url = 'localhost:5000/api/produtos';
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        data.sort((a, b) => a.nome_produto.localeCompare(b.nome_produto));
+        setProdutos([...data]);
+      });
+  }
+*/
