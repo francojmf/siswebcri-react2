@@ -13,11 +13,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
 import { getIdUsuario } from '../../../../src/services/auth';
-//import { Modal, Table } from 'react-bootstrap';
 
 export default function EntidadeCadastrar() {
   const classes = useStyles();
-  //  const nomeUsuario = getNomeUsuario();
   const idUsuario = getIdUsuario();
   const [nome, setNome] = useState('');
   const [cpf_cnpj, setCpf] = useState('');
@@ -31,7 +29,6 @@ export default function EntidadeCadastrar() {
   const [estado, setEstado] = React.useState('SP');
   const [uf, setUf] = React.useState('SP');
   const [listUf, setListUf] = React.useState([]);
-  // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
 
   function loadUf() {
@@ -122,14 +119,14 @@ export default function EntidadeCadastrar() {
               >
                 <ArrowBackIcon /> Voltar
               </Button>
-              <Button
+              {/* <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
                 href={'/admin/entidades/appCep'}
               >
                 Busca CEP com Logradouro
-              </Button>
+              </Button> */}
               <Paper className={classes.paper}>
                 <h2>Cadastro de Nova Entidade</h2>
                 <Grid container spacing={3}>

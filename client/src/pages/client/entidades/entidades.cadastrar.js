@@ -125,14 +125,14 @@ export default function EntidadeCadastrar() {
               >
                 <ArrowBackIcon /> Voltar
               </Button>
-              <Button
+              {/* <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
                 href={'/client/produtos/appCep'}
               >
                 Busca CEP com Logradouro
-              </Button>
+              </Button> */}
               <Paper className={classes.paper}>
                 <h2>Cadastro de Nova Entidade</h2>
                 <Grid container spacing={3}>

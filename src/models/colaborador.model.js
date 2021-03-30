@@ -7,7 +7,7 @@ const DataSchema = new mongoose.Schema(
       required: true,
       ref: 'Usuario',
     },
-    atividade_colaborador: String,
+    atividade: String,
     fone_colaborador: String,
   },
   {
@@ -15,5 +15,5 @@ const DataSchema = new mongoose.Schema(
   }
 );
 
-const Entidade = mongoose.model('Entidades', DataSchema);
-module.exports = Entidade;
+const Colaborador = mongoose.model('Colaboradores', DataSchema);
+module.exports = Colaborador;
