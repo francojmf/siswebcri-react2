@@ -22,9 +22,7 @@
     "mongoose": "^5.12.0",
     "path": "^0.12.7",
     "react-finderselect": "^1.0.5",
-    "react-router-dom": "^5.2.0"
-  },
-  "devDependencies": {
+    "react-router-dom": "^5.2.0",
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.3"
   }
