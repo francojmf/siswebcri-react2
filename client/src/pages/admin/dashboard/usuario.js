@@ -22,16 +22,23 @@ export default function Dashboard() {
         </tfoot>
         <tbody>
           <tr>
-            <td colspan="6">Este é o modelo de cadeira de rodas disponível:</td>
+            <td colspan="6">
+              Este é o modelo de cadeira de rodas disponível :
+            </td>
             <td rowspan="2" colspan="6">
-              <p>- Você tem acesso como Usuário comum e pode:</p>
-              <p>- Editar seus dados e pedidos.</p>
-              <p>- Fazer novos pedidos.</p>
+              <h5> Você tem acesso como Usuário comum e pode:</h5>
+              <h6>- Editar seus dados e pedidos.</h6>
+              <h6>- Fazer novos pedidos.</h6>
+              <p></p>
               <h4>Aviso</h4>
+
               <p>
                 - Ao realizar o cadastro você estará concordando com os Termos
-                de Uso da UNIFESP. - Os dados informados por você serão mantidos
-                em sigilo, não serão repassados a terceiros.
+                de Uso da UNIFESP.{' '}
+              </p>
+              <p>
+                - Os dados informados por você serão mantidos em sigilo, não
+                serão repassados a terceiros.
               </p>
               <AccountBalanceIcon style={{ color: 'green' }} />
               <a href="https://www.unifesp.br/termos-de-uso">

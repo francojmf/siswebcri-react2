@@ -156,6 +156,9 @@ export default function PedidosListagem() {
                               <StyledTableCell align="center">
                                 Enviado
                               </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Status
+                              </StyledTableCell>
                               <StyledTableCell align="right">
                                 Opções
                               </StyledTableCell>
@@ -200,6 +203,9 @@ export default function PedidosListagem() {
                                         style={{ color: 'red' }}
                                       ></i>
                                     )}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {item.status_pedido}
                                   </TableCell>
                                   <TableCell align="right">
                                     <ButtonGroup aria-label="outlined success button group">

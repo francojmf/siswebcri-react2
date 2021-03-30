@@ -25,35 +25,17 @@ export default function PedidosListagem() {
 
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [entidades, setEntidades] = useState('');
 
   useEffect(() => {
     async function loadPedidos() {
       const response = await api.get('/api/pedidos');
       setPedidos(response.data);
-      const response2 = await api.get('/api/entidades');
-      setEntidades(response2.data);
       setLoading(false);
     }
     loadPedidos();
   }, []);
 
   async function handleDelete(id) {
-    if (
-      window.confirm(
-        'Deseja realmente excluir esta entidade ?' +
-          'Este comando não pode ser desfeito ...'
-      )
-    ) {
-      var result = await api.delete('api/entidades/' + id);
-      if (result.status === 200) {
-        window.location.href = '/admin/pedidos';
-      } else {
-        alert('Ocorreu um erro. Por favor, tente novamente!');
-      }
-    }
-  }
-  async function handleDelete2(id) {
     if (
       window.confirm(
         'Deseja realmente excluir este pedido ?' +
@@ -82,79 +64,6 @@ export default function PedidosListagem() {
                 <h2>Listagem de Pedidos</h2>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12}>
-                    <TableContainer component={Paper}>
-                      {loading ? (
-                        <LinearProgress
-                          style={{ width: '50%', margin: '20px auto' }}
-                        />
-                      ) : (
-                        <Table
-                          className={classes.table}
-                          aria-label="simple table"
-                        >
-                          <TableHead>
-                            <TableRow>
-                              <StyledTableCell>Entidade</StyledTableCell>
-                              <StyledTableCell align="center">
-                                CPF ou CNPJ
-                              </StyledTableCell>
-                              <StyledTableCell align="center">
-                                Endereço
-                              </StyledTableCell>
-                              <StyledTableCell align="center">
-                                Cidade
-                              </StyledTableCell>
-                              <StyledTableCell align="center">
-                                CEP
-                              </StyledTableCell>
-                              <StyledTableCell align="right">
-                                Opções
-                              </StyledTableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {entidades.map((item) => (
-                              <TableRow key={item._id}>
-                                <TableCell component="th" scope="row">
-                                  {item.nome_entidade}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                  {item.cpf_cnpj}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.logradouro}, {item.numero} -
-                                  {item.complemento}
-                                </TableCell>
-                                <TableCell align="center">
-                                  {item.cidade} - {item.estado}
-                                </TableCell>
-                                <TableCell align="center">{item.cep}</TableCell>
-                                <TableCell align="right">
-                                  <ButtonGroup aria-label="outlined success button group">
-                                    <Button
-                                      variant="contained"
-                                      style={{ color: 'green' }}
-                                      href={
-                                        '/admin/entidades/editar/' + item._id
-                                      }
-                                    >
-                                      <AutorenewIcon /> Atualizar
-                                    </Button>
-                                    <Button
-                                      variant="contained"
-                                      color="secondary"
-                                      onClick={() => handleDelete(item._id)}
-                                    >
-                                      <ClearIcon />
-                                    </Button>
-                                  </ButtonGroup>
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      )}
-                    </TableContainer>
                     <div>
                       <p></p>
                     </div>
@@ -183,6 +92,9 @@ export default function PedidosListagem() {
                               </StyledTableCell>
                               <StyledTableCell align="center">
                                 Enviado
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                Status
                               </StyledTableCell>
                               <StyledTableCell align="right">
                                 Opções
@@ -227,21 +139,22 @@ export default function PedidosListagem() {
                                     ></i>
                                   )}
                                 </TableCell>
+                                <TableCell align="center">
+                                  {item.status_pedido}
+                                </TableCell>
                                 <TableCell align="right">
                                   <ButtonGroup aria-label="outlined success button group">
                                     <Button
                                       variant="contained"
                                       style={{ color: 'green' }}
-                                      href={
-                                        '/client/pedidos/editar/' + item._id
-                                      }
+                                      href={'/admin/pedidos/editar/' + item._id}
                                     >
                                       <AutorenewIcon /> Atualizar
                                     </Button>
                                     <Button
                                       variant="contained"
                                       color="secondary"
-                                      onClick={() => handleDelete2(item._id)}
+                                      onClick={() => handleDelete(item._id)}
                                     >
                                       <ClearIcon />
                                     </Button>
@@ -261,15 +174,6 @@ export default function PedidosListagem() {
                         detalhes sobre cada pedido.
                       </p>
                       <p></p>
-                      <Button
-                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                        variant="contained"
-                        color="success"
-                        href={'/admin/entidades/cadastrar'}
-                      >
-                        <AddIcon />
-                        Cadastrar Entidade
-                      </Button>
                       <Button
                         style={({ marginBottom: 10 }, { marginLeft: 10 })}
                         variant="contained"

@@ -30,10 +30,42 @@ module.exports = {
   },
 
   async update(req, res) {
-    const data = req.body;
-    const pedido = await Pedido.findOneAndUpdate({ _id }, data, {
+    const {
+      nome_pessoa,
+      idade_pessoa,
+      med_a,
+      med_b,
+      med_c,
+      med_d,
+      med_e,
+      med_f,
+      user,
+      produto,
+      entidade,
+      aprovado_pedido,
+      status_pedido,
+      updatedAt,
+      _id,
+    } = req.body;
+    const data = {
+      nome_pessoa,
+      idade_pessoa,
+      med_a,
+      med_b,
+      med_c,
+      med_d,
+      med_e,
+      med_f,
+      user,
+      produto,
+      entidade,
+      aprovado_pedido,
+      status_pedido,
+      updatedAt,
+    };
+    const pedidoUpdate = await Pedido.findOneAndUpdate({ _id }, data, {
       new: true,
     });
-    res.json(pedido);
+    res.json(pedidoUpdate);
   },
 };

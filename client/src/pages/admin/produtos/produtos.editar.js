@@ -78,7 +78,7 @@ export default function ProdutoEditar() {
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="primary"
-                href={'/admin/produtosos/cadastrar'}
+                href={'/admin/produtos/cadastrar'}
               >
                 <AddIcon />
                 Cadastrar

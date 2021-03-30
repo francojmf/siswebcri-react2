@@ -78,7 +78,7 @@ export default function EntidadesEditar() {
       const response2 = await api.put('/api/entidades', data);
 
       if (response2.status === 200) {
-        // alert('Entidade editada com sucesso !!');
+        alert('Entidade editada com sucesso !!');
         window.location.href = '/admin/entidades';
       } else {
         alert('Erro ao cadastrar a entidade!');

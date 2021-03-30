@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@material-ui/core/Box';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import MenuUsuario from '../../../components/menu-usuario';
+import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -15,6 +16,7 @@ import api from '../../../services/api';
 import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
 import { useStyles } from '../../../functions/use_styles';
+//import { Form } from 'react-bootstrap';
 
 export default function PedidosEditar() {
   const classes = useStyles();
@@ -30,11 +32,9 @@ export default function PedidosEditar() {
   const [medE, setMedE] = useState('');
   const [medF, setMedF] = useState('');
   const [createdAt, setCreate] = useState('');
-  const [status, setStatus] = useState('');
+  const [updatedAt, setUpdate] = useState('');
   const [aprovado, setAprovado] = useState(false);
-  const [enviado, setEnviado] = useState(false);
   const { idPedido } = useParams();
-  // console.log(idPedido);
 
   useEffect(() => {
     async function getPedido() {
@@ -51,9 +51,8 @@ export default function PedidosEditar() {
       setMedE(response.data.med_e);
       setMedF(response.data.med_f);
       setCreate(response.data.createdAt);
-      setStatus(response.data.status_pedido);
+      setUpdate(response.data.updatedAt);
       setAprovado(response.data.aprovado_pedido);
-      setEnviado(response.data.enviado_pedido);
     }
     getPedido();
   }, []);
@@ -71,7 +70,6 @@ export default function PedidosEditar() {
       user: user,
       produto: produto,
       entidade: entidade,
-      aprovado_pedido: aprovado,
       _id: idPedido,
     };
 
@@ -85,11 +83,11 @@ export default function PedidosEditar() {
       medE !== '' &&
       medF !== ''
     ) {
-      const response = await api.put('/api/pedidos', data);
+      const response = await api.post('/api/pedidos', data);
 
       if (response.status === 200) {
         alert('Pedido editado com Sucesso !!');
-        window.location.href = '/client/pedidos';
+        window.location.href = '/admin/pedidos';
       } else {
         alert('Erro ao atualizar o pedido!');
       }
@@ -100,7 +98,7 @@ export default function PedidosEditar() {
 
   return (
     <div className={classes.root}>
-      <MenuUsuario title={'Sis Web CRI - Editar Pedido'} />
+      <MenuAdmin title={'Sis Web CRI - Editar Pedido'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
@@ -110,14 +108,14 @@ export default function PedidosEditar() {
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="primary"
-                href={'/client/pedidos'}
+                href={'/admin/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                href={'/client/pedidos/cadastrar'}
+                href={'/admin/pedidos/cadastrar'}
               >
                 <AddIcon />
                 Cadastrar
@@ -127,9 +125,9 @@ export default function PedidosEditar() {
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      disabled
-                      type="text"
+                      required
                       id="user"
+                      name="user"
                       label="Usuário"
                       fullWidth
                       value={user}
@@ -138,9 +136,9 @@ export default function PedidosEditar() {
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      disabled
-                      type="text"
+                      required
                       id="produto"
+                      name="produto"
                       label="Produto"
                       fullWidth
                       value={produto}
@@ -149,8 +147,7 @@ export default function PedidosEditar() {
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      disabled
-                      type="text"
+                      required
                       id="descricao"
                       name="descricao"
                       label="Entidade"
@@ -160,17 +157,24 @@ export default function PedidosEditar() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
-                    <TextField
-                      disabled
-                      label="Criado em: "
-                      fullWidth
-                      value={createdAt}
-                      onChange={(e) => setCreate(e.target.value)}
-                    />
+                    <FormGroup controlId="aprovado">
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={aprovado}
+                            //onChange={handleChange}
+                            onChange={(e) => setAprovado(e.target.checked)}
+                            name="aprovado"
+                            color="primary"
+                          />
+                        }
+                        label="Aprovado"
+                      />
+                    </FormGroup>
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      type="text"
+                      type="name"
                       required
                       id="pessoa"
                       name="pessoa"
@@ -196,35 +200,21 @@ export default function PedidosEditar() {
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      disabled
-                      label="Status do Pedido:"
+                      label="Criado em: "
                       fullWidth
-                      value={status}
-                      onChange={(e) => setStatus(e.target.value)}
+                      value={createdAt}
+                      onChange={(e) => setCreate(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={2}>
-                    <InputLabel>Aprovado</InputLabel>
-                    {aprovado ? (
-                      <i
-                        className="fas fa-check"
-                        style={{ color: 'green' }}
-                      ></i>
-                    ) : (
-                      <i className="fas fa-times" style={{ color: 'red' }}></i>
-                    )}
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      label="Última edição: "
+                      fullWidth
+                      value={updatedAt}
+                      onChange={(e) => setUpdate(e.target.value)}
+                    />
                   </Grid>
-                  <Grid item xs={12} sm={2}>
-                    <InputLabel>Enviado</InputLabel>
-                    {enviado ? (
-                      <i
-                        className="fas fa-check"
-                        style={{ color: 'green' }}
-                      ></i>
-                    ) : (
-                      <i className="fas fa-times" style={{ color: 'red' }}></i>
-                    )}
-                  </Grid>
+
                   <Grid item xs={12} sm={2}>
                     <TextField
                       required
@@ -311,11 +301,6 @@ export default function PedidosEditar() {
               </Paper>
             </Grid>
           </Grid>
-          <div>
-            <p></p>
-            <p>Você pode editar apenas os campos disponíveis.</p>
-            <p>Para cancelar um pedido é necessário enviar um email para ...</p>
-          </div>
           <Box pt={4}>
             <Footer />
           </Box>

@@ -193,29 +193,31 @@ export default function PedidoCadastrar() {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {entidades.map((item) => (
-                                <TableRow key={item._id}>
-                                  <TableCell component="th" scope="row">
-                                    {item.nome_entidade}
-                                  </TableCell>
+                              {entidades
+                                .filter((item) => item.user === idUsuario)
+                                .map((item) => (
+                                  <TableRow key={item._id}>
+                                    <TableCell component="th" scope="row">
+                                      {item.nome_entidade}
+                                    </TableCell>
 
-                                  <TableCell align="right">
-                                    <Button
-                                      variant="contained"
-                                      style={{ color: 'green' }}
-                                      onClick={(event) =>
-                                        clickEvent(
-                                          event,
-                                          setEntidadeId(item._id),
-                                          setEntidadeNome(item.nome_entidade)
-                                        )
-                                      }
-                                    >
-                                      Selecione esta
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              ))}
+                                    <TableCell align="right">
+                                      <Button
+                                        variant="contained"
+                                        style={{ color: 'green' }}
+                                        onClick={(event) =>
+                                          clickEvent(
+                                            event,
+                                            setEntidadeId(item._id),
+                                            setEntidadeNome(item.nome_entidade)
+                                          )
+                                        }
+                                      >
+                                        Selecione esta
+                                      </Button>
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
                             </TableBody>
                           </Table>
                         )}
@@ -250,6 +252,7 @@ export default function PedidoCadastrar() {
 
                     <Grid item xs={12} sm={3}>
                       <TextField
+                        disabled
                         type="name"
                         id="produto"
                         name="produto"
@@ -261,6 +264,7 @@ export default function PedidoCadastrar() {
                     </Grid>
                     <Grid item xs={12} sm={3}>
                       <TextField
+                        disabled
                         type="name"
                         id="entidade"
                         name="entidade"

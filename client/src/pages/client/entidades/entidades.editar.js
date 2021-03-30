@@ -79,7 +79,7 @@ export default function EntidadeEditar() {
       const response = await api.put('/api/entidades', data);
 
       if (response.status === 200) {
-        // alert('Entidade editada com sucesso !!');
+        alert('Entidade editada com sucesso !!');
         window.location.href = '/client/entidades';
       } else {
         alert('Erro ao cadastrar a entidade!');
@@ -141,7 +141,7 @@ export default function EntidadeEditar() {
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      required
+                      disabled
                       type="text"
                       id="usuario"
                       name="usuario"

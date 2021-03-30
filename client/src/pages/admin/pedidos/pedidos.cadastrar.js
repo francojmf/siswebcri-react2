@@ -250,6 +250,7 @@ export default function PedidoCadastrar() {
 
                     <Grid item xs={12} sm={3}>
                       <TextField
+                        disabled
                         type="name"
                         id="produto"
                         name="produto"
@@ -261,6 +262,7 @@ export default function PedidoCadastrar() {
                     </Grid>
                     <Grid item xs={12} sm={3}>
                       <TextField
+                        disabled
                         type="name"
                         id="entidade"
                         name="entidade"

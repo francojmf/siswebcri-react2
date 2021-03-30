@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@material-ui/core/Box';
+// import MenuItem from '@material-ui/core/MenuItem';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -13,44 +14,86 @@ import api from '../../../services/api';
 import AddIcon from '@material-ui/icons/Add';
 import { useParams } from 'react-router-dom';
 import { useStyles } from '../../../functions/use_styles';
+// import { Form } from 'react-bootstrap';
 
-export default function PedidoEditar() {
+export default function PedidosEditar() {
   const classes = useStyles();
-
-  const [nome, setNome] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [tipo, setTipo] = useState('');
-  const [qtd, setQtd] = useState('');
-
-  const { idProduto } = useParams();
+  const [user, setUser] = useState('');
+  const [produto, setProduto] = useState('');
+  const [entidade, setEntidade] = useState('');
+  const [pessoa, setPessoa] = useState('');
+  const [idade, setIdade] = useState('');
+  const [medA, setMedA] = useState('');
+  const [medB, setMedB] = useState('');
+  const [medC, setMedC] = useState('');
+  const [medD, setMedD] = useState('');
+  const [medE, setMedE] = useState('');
+  const [medF, setMedF] = useState('');
+  const [createdAt, setCreate] = useState('');
+  const [updatedAt, setUpdate] = useState('');
+  const [aprovado, setAprovado] = useState(false);
+  const [status, setStatus] = useState('');
+  const { idPedido } = useParams();
+  console.log(status);
 
   useEffect(() => {
-    async function getProduto() {
-      var response = await api.get('/api/produtos.details/' + idProduto);
-      setNome(response.data.nome_produto);
-      setDescricao(response.data.descricao_produto);
-      setTipo(response.data.tipo_produto);
-      setQtd(response.data.qtd_produto);
+    async function getPedido() {
+      var response = await api.get('/api/pedidos.details/' + idPedido);
+      setUser(response.data.user);
+      setProduto(response.data.produto);
+      setEntidade(response.data.entidade);
+      setPessoa(response.data.nome_pessoa);
+      setIdade(response.data.idade_pessoa);
+      setMedA(response.data.med_a);
+      setMedB(response.data.med_b);
+      setMedC(response.data.med_c);
+      setMedD(response.data.med_d);
+      setMedE(response.data.med_e);
+      setMedF(response.data.med_f);
+      setCreate(response.data.createdAt);
+      setUpdate(response.data.updatedAt);
+      setAprovado(response.data.aprovado_pedido);
+      setStatus(response.data.status_pedido);
     }
-    getProduto();
+    getPedido();
   }, []);
 
   async function handleSubmit() {
     const data = {
-      nome_produto: nome,
-      descricao_produto: descricao,
-      tipo_produto: tipo,
-      qtd_produto: qtd,
-      _id: idProduto,
+      nome_pessoa: pessoa,
+      idade_pessoa: idade,
+      med_a: medA,
+      med_b: medB,
+      med_c: medC,
+      med_d: medD,
+      med_e: medE,
+      med_f: medF,
+      user: user,
+      produto: produto,
+      entidade: entidade,
+      aprovado_pedido: aprovado,
+      updatedAt: updatedAt,
+      status_pedido: status,
+      _id: idPedido,
     };
 
-    if (nome !== '' && descricao !== '' && tipo !== '' && qtd !== '') {
-      const response = await api.post('/api/produtos', data);
+    if (
+      pessoa !== '' &&
+      idade !== '' &&
+      medA !== '' &&
+      medB !== '' &&
+      medC !== '' &&
+      medD !== '' &&
+      medE !== '' &&
+      medF !== ''
+    ) {
+      const response = await api.put('/api/pedidos', data);
 
       if (response.status === 200) {
-        window.location.href = '/admin/produtos';
+        alert('Pedido editado com Sucesso !!');
+        window.location.href = '/admin/pedidos';
       } else {
-        alert('Erro ao atualizar o produto!');
+        alert('Erro ao atualizar o pedido!');
       }
     } else {
       alert('Por favor, preencha todos os dados!');
@@ -59,7 +102,7 @@ export default function PedidoEditar() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
+      <MenuAdmin title={'Sis Web CRI - Editar Pedido'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
@@ -68,73 +111,206 @@ export default function PedidoEditar() {
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
-                href={'/admin/produtos'}
+                color="primary"
+                href={'/admin/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>
               <Button
-                style={{ marginBottom: 10 }}
+                style={{ marginBottom: 30 }}
                 variant="contained"
-                color="primary"
-                href={'/admin/produtosos/cadastrar'}
+                href={'/admin/pedidos/cadastrar'}
               >
                 <AddIcon />
                 Cadastrar
               </Button>
               <Paper className={classes.paper}>
-                <h2>Atualização de Produtos</h2>
+                <h2>Editar Pedido</h2>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={12}>
+                  <Grid item xs={12} sm={3}>
                     <TextField
                       required
-                      id="nome"
-                      name="nome"
-                      label="Nome do Produto"
+                      id="user"
+                      name="user"
+                      label="Usuário"
                       fullWidth
-                      autoComplete="nome"
-                      value={nome}
-                      onChange={(e) => setNome(e.target.value)}
+                      value={user}
+                      onChange={(e) => setUser(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      required
+                      id="produto"
+                      name="produto"
+                      label="Produto"
+                      fullWidth
+                      value={produto}
+                      onChange={(e) => setProduto(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
                     <TextField
                       required
                       id="descricao"
                       name="descricao"
-                      label="Descrição do produto"
+                      label="Entidade"
                       fullWidth
-                      autoComplete="nome"
-                      value={descricao}
-                      onChange={(e) => setDescricao(e.target.value)}
+                      value={entidade}
+                      onChange={(e) => setEntidade(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <TextField
-                      type="name"
-                      required
-                      id="tipo"
-                      name="tipo"
-                      label="Tipo"
+                      label="Criado em: "
                       fullWidth
-                      autoComplete="tipo"
-                      value={tipo}
-                      onChange={(e) => setTipo(e.target.value)}
+                      value={createdAt}
+                      onChange={(e) => setCreate(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={3}>
+
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      type="text"
+                      required
+                      id="pessoa"
+                      name="pessoa"
+                      label="Nome da criança"
+                      fullWidth
+                      autoComplete="pessoa"
+                      value={pessoa}
+                      onChange={(e) => setPessoa(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={1}>
                     <TextField
                       type="number"
                       required
-                      id="qtd"
-                      name="qtd"
-                      label="Quantidade"
+                      id="idade"
+                      name="idade"
+                      label="Idade"
                       fullWidth
-                      autoComplete="qtd"
-                      value={qtd}
-                      onChange={(e) => setQtd(e.target.value)}
+                      autoComplete="idade"
+                      value={idade}
+                      onChange={(e) => setIdade(e.target.value)}
                     />
                   </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      select
+                      type="boolean"
+                      id="status"
+                      name="status"
+                      label="status"
+                      fullWidth
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value={'Recebido'}>Recebido</option>
+                      <option value={'Aprovado'}>Aprovado</option>
+                      <option value={'Em Produção'}>Em Produção</option>
+                      <option value={'Pronto'}>Pronto</option>
+                      <option value={'Enviado'}>Enviado</option>
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      select
+                      type="boolean"
+                      id="aprovado"
+                      name="aprovado"
+                      label="Aprovado"
+                      fullWidth
+                      value={aprovado}
+                      onChange={(e) => setAprovado(e.target.value)}
+                    >
+                      <option value={true}> True </option>
+                      <option value={false}> False</option>
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <TextField
+                      type="text"
+                      label="Última edição: "
+                      fullWidth
+                      value={updatedAt}
+                      onChange={(e) => setUpdate(e.target.value)}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      required
+                      id="medA"
+                      name="medA"
+                      label="Medida A (cm)"
+                      fullWidth
+                      autoComplete="medA"
+                      value={medA}
+                      onChange={(e) => setMedA(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      required
+                      id="medB"
+                      name="medB"
+                      label="Medida B (cm)"
+                      fullWidth
+                      autoComplete="medB"
+                      value={medB}
+                      onChange={(e) => setMedB(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      required
+                      id="medC"
+                      name="medC"
+                      label="Medida C (cm)"
+                      fullWidth
+                      autoComplete="medC"
+                      value={medC}
+                      onChange={(e) => setMedC(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      required
+                      id="medD"
+                      name="medD"
+                      label="Medida D (cm)"
+                      fullWidth
+                      autoComplete="medD"
+                      value={medD}
+                      onChange={(e) => setMedD(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      required
+                      id="medE"
+                      name="medE"
+                      label="Medida E (cm)"
+                      fullWidth
+                      autoComplete="medE"
+                      value={medE}
+                      onChange={(e) => setMedE(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField
+                      required
+                      id="medF"
+                      name="medF"
+                      label="Medida F (cm)"
+                      fullWidth
+                      autoComplete="medF"
+                      value={medF}
+                      onChange={(e) => setMedF(e.target.value)}
+                    />
+                  </Grid>
+
                   <Grid item xs={12} sm={12}>
                     <Button
                       variant="contained"
