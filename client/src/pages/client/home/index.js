@@ -1,8 +1,6 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import MenuHome from '../../../components/menu-home';
 import Footer from '../../../components/footer-admin';
 import { useStyles } from '../../../functions/use_styles';

@@ -107,8 +107,8 @@ export default function EntidadesListagem() {
                                   {item.cpf_cnpj}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {item.logradouro}, {item.numero} -
-                                  {item.complemento}
+                                  {item.logradouro}, {item.numero},
+                                  {item.complemento} , {item.bairro}
                                 </TableCell>
                                 <TableCell align="center">
                                   {item.cidade} - {item.estado}
@@ -120,7 +120,7 @@ export default function EntidadesListagem() {
                                       variant="contained"
                                       style={{ color: 'green' }}
                                       href={
-                                        '/client/entidades/editar/' + item._id
+                                        '/admin/entidades/editar/' + item._id
                                       }
                                     >
                                       <AutorenewIcon /> Atualizar

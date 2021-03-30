@@ -3,11 +3,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 //import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
-
-import Button from '@material-ui/core/Button';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-//import SaveIcon from '@material-ui/icons/Save';
-//import api from '../../../services/api';
+//import Button from '@material-ui/core/Button';
+//import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useStyles } from '../../../../functions/use_styles';
 //import styles from '../styles.module.css';
 //import Form2 from './form2';
@@ -21,8 +18,6 @@ function Form3() {
   const [listUf, setListUf] = React.useState([]);
   // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
-  const dados = listUf;
-  const dados2 = listCity;
   const city = cidade;
   const uf2 = uf;
 

@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Dashboard from './pages/admin/dashboard';
 import Entidades from './pages/admin/entidades';
 import EntidadesCadastrar from './pages/admin/entidades/entidades.cadastrar';
+import EntidadesEditar from './pages/admin/entidades/entidades.editar';
 import Pedidos from './pages/admin/pedidos';
 import PedidosCadastrar from './pages/admin/pedidos/pedidos.cadastrar';
 import PedidosEditar from './pages/admin/pedidos/pedidos.editar';
@@ -23,6 +24,7 @@ import UsuarioEditar from './pages/client/usuario/usuario.editar';
 import PrivateRoute from './services/wAuth';
 import MinhaEntidade from './pages/client/entidades';
 import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
+import EntidadeEditar from './pages/client/entidades/entidades.editar';
 import AppCEP from './pages/client/produtos/appCep';
 import AppCEP2 from './pages/admin/entidades/appCep';
 import MeusPedidos from './pages/client/pedidos';
@@ -63,7 +65,12 @@ export default function Routes() {
           exact
           component={UsuarioEditar}
         />
-        <PrivateRoute
+        <Route
+          path="/client/entidades/editar/:idPedido"
+          exact
+          component={EntidadeEditar}
+        />
+        <Route
           path="/client/pedidos/editar/:idPedido"
           exact
           component={PedidoEditar}
@@ -105,6 +112,11 @@ export default function Routes() {
           path="/admin/entidades/cadastrar"
           exact
           component={EntidadesCadastrar}
+        />
+        <PrivateRoute
+          path="/admin/entidades/editar/:idEntidade"
+          exact
+          component={EntidadesEditar}
         />
         <PrivateRoute path="/admin/usuarios" exact component={Usuarios} />
         <PrivateRoute

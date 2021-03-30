@@ -13,7 +13,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import api from '../../../services/api';
 import { useStyles } from '../../../functions/use_styles';
 import { getIdUsuario } from '../../../../src/services/auth';
-import { Modal, Table } from 'react-bootstrap';
+//import { Modal, Table } from 'react-bootstrap';
 
 export default function EntidadeCadastrar() {
   const classes = useStyles();
@@ -26,16 +26,13 @@ export default function EntidadeCadastrar() {
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
   const [cep, setCep] = useState('');
+  const [bairro, setBairro] = useState('');
   const [cidade, setCidade] = React.useState('');
   const [estado, setEstado] = React.useState('SP');
   const [uf, setUf] = React.useState('SP');
   const [listUf, setListUf] = React.useState([]);
   // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
-
-  console.log(uf);
-  console.log(estado);
-  console.log(cidade);
 
   function loadUf() {
     let url = 'https://servicodados.ibge.gov.br/';
@@ -59,16 +56,17 @@ export default function EntidadeCadastrar() {
       });
   }
 
+  function clickEvent(event, a, b) {}
+
   React.useEffect(() => {
     loadUf();
   }, []);
-  console.log(listUf);
+
   React.useEffect(() => {
     if (uf) {
       loadCity(uf);
     }
   }, [uf]);
-  console.log(listCity);
 
   async function handleSubmit() {
     const data = {
@@ -80,6 +78,7 @@ export default function EntidadeCadastrar() {
       numero: numero,
       complemento: complemento,
       cep: cep,
+      bairro: bairro,
       cidade: cidade,
       estado: estado,
     };
@@ -90,7 +89,7 @@ export default function EntidadeCadastrar() {
       fone !== '' &&
       logradouro !== '' &&
       numero !== '' &&
-      complemento !== '' &&
+      bairro !== '' &&
       cep !== '' &&
       cidade !== '' &&
       estado !== ''
@@ -98,7 +97,7 @@ export default function EntidadeCadastrar() {
       const response = await api.post('/api/entidades', data);
       if (response.status === 200) {
         alert('Entidade cadastrada com sucesso !!');
-        window.location.href = '/client/pedidos';
+        window.location.href = '/admin/pedidos';
       } else {
         alert('Erro ao cadastrar a entidade!');
       }
@@ -119,7 +118,7 @@ export default function EntidadeCadastrar() {
                 style={{ marginBottom: 30 }}
                 variant="contained"
                 color="success"
-                href={'/client/pedidos'}
+                href={'/admin/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
               </Button>
@@ -137,7 +136,7 @@ export default function EntidadeCadastrar() {
                   <Grid item xs={12} sm={4}>
                     <TextField
                       required
-                      type="name"
+                      type="text"
                       id="nome"
                       name="nome"
                       label="Nome da Entidade"
@@ -149,7 +148,7 @@ export default function EntidadeCadastrar() {
                   <Grid item xs={12} sm={4}>
                     <TextField
                       required
-                      type="name"
+                      type="text"
                       id="cpf_cnpj"
                       name="cpf_cnpj"
                       label="CNPJ da entidade ou seu CPF"
@@ -161,7 +160,7 @@ export default function EntidadeCadastrar() {
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
-                      type="name"
+                      type="text"
                       id="fone"
                       name="fone"
                       label="Telefone de contato"
@@ -172,7 +171,7 @@ export default function EntidadeCadastrar() {
                   </Grid>
                   <Grid item xs={12} sm={5}>
                     <TextField
-                      type="name"
+                      type="text"
                       required
                       id="logradouro"
                       name="logradouro"
@@ -184,7 +183,7 @@ export default function EntidadeCadastrar() {
                   </Grid>
                   <Grid item xs={12} sm={2}>
                     <TextField
-                      type="number"
+                      type="text"
                       required
                       id="numero"
                       name="numero"
@@ -196,7 +195,7 @@ export default function EntidadeCadastrar() {
                   </Grid>
                   <Grid item xs={12} sm={4}>
                     <TextField
-                      type="name"
+                      type="text"
                       id="complemento"
                       name="complemento"
                       label="Complemento"
@@ -208,21 +207,26 @@ export default function EntidadeCadastrar() {
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
-                      type="name"
+                      type="text"
                       id="bairro"
                       name="bairro"
                       label="Bairro"
                       fullWidth
                       value={cep}
-                      onChange={(e) => setCep(e.target.value)}
+                      onChange={(e) => setBairro(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <label> Estado : </label>
                     <Select
                       value={uf}
-                      onChange={(e) => setEstado(e.target.name)}
-                      onChange={(e) => setUf(e.target.value)}
+                      onChange={(e) =>
+                        clickEvent(
+                          e,
+                          setEstado(e.target.name),
+                          setUf(e.target.value)
+                        )
+                      }
                     >
                       {listUf.map((a, b) => (
                         <option name={a.sigla} value={a.id}>

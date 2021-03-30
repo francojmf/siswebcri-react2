@@ -45,9 +45,10 @@ export default function ProdutoEditar() {
     };
 
     if (nome !== '' && descricao !== '' && tipo !== '' && qtd !== '') {
-      const response = await api.post('/api/produtos', data);
+      const response = await api.put('/api/produtos', data);
 
       if (response.status === 200) {
+        //  alert('Produto editado com sucesso !!');
         window.location.href = '/admin/produtos';
       } else {
         alert('Erro ao atualizar o produto!');
@@ -59,7 +60,7 @@ export default function ProdutoEditar() {
 
   return (
     <div className={classes.root}>
-      <MenuAdmin title={'Sis Web CRI - PRODUTOS'} />
+      <MenuAdmin title={'Sis Web CRI - Editar Produto'} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} style={{ marginBottom: 30 }} />
         <Container maxWidth="lg" className={classes.container}>
@@ -74,7 +75,7 @@ export default function ProdutoEditar() {
                 <ArrowBackIcon /> Voltar
               </Button>
               <Button
-                style={{ marginBottom: 10 }}
+                style={{ marginBottom: 30 }}
                 variant="contained"
                 color="primary"
                 href={'/admin/produtosos/cadastrar'}

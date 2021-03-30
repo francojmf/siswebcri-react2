@@ -30,7 +30,33 @@ module.exports = {
   },
 
   async update(req, res) {
-    const data = req.body;
+    const {
+      _id,
+      nome_entidade,
+      cpf_cnpj,
+      fone_entidade,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cep,
+      cidade,
+      estado,
+      user,
+    } = req.body;
+    const data = {
+      nome_entidade,
+      cpf_cnpj,
+      fone_entidade,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cep,
+      cidade,
+      estado,
+      user,
+    };
     const entidade = await Entidade.findOneAndUpdate({ _id }, data, {
       new: true,
     });

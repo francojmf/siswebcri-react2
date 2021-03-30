@@ -156,31 +156,8 @@ export default function PedidosListagem() {
                       )}
                     </TableContainer>
                     <div>
-                      <p>
-                        Para fazer um pedido é preciso "Cadastrar Entidade" com
-                        o endereço de entrega, caso ainda não tenha feito isto.
-                      </p>
-                      <Button
-                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                        variant="contained"
-                        color="success"
-                        href={'/admin/entidades/cadastrar'}
-                      >
-                        <AddIcon />
-                        Cadastrar Entidade
-                      </Button>
-                      <Button
-                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
-                        variant="contained"
-                        color="success"
-                        href={'/admin/pedidos/cadastrar'}
-                      >
-                        <AddIcon />
-                        Iniciar Pedido
-                      </Button>
                       <p></p>
                     </div>
-
                     <TableContainer component={Paper}>
                       {loading ? (
                         <LinearProgress
@@ -278,13 +255,30 @@ export default function PedidosListagem() {
                     </TableContainer>
 
                     <div>
+                      <p></p>
                       <p>
-                        Para fazer um pedido é necessário informar alguns dados
-                        da criaça que receberá a doação.
+                        Clicando em Atualizar você poderá Aprovar e Editar mais
+                        detalhes sobre cada pedido.
                       </p>
-                      <p>
-                        Para iniciar um novo pedido clique em "Iniciar Pedido".
-                      </p>
+                      <p></p>
+                      <Button
+                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
+                        variant="contained"
+                        color="success"
+                        href={'/admin/entidades/cadastrar'}
+                      >
+                        <AddIcon />
+                        Cadastrar Entidade
+                      </Button>
+                      <Button
+                        style={({ marginBottom: 10 }, { marginLeft: 10 })}
+                        variant="contained"
+                        color="success"
+                        href={'/admin/pedidos/cadastrar'}
+                      >
+                        <AddIcon />
+                        Iniciar Pedido
+                      </Button>
                       <p></p>
                     </div>
                   </Grid>

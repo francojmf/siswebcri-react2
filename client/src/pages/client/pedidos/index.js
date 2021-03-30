@@ -41,17 +41,6 @@ export default function PedidosListagem() {
   console.log(entidades);
   console.log(pedidos);
 
-  async function handleDelete(id) {
-    if (window.confirm('Deseja realmente excluir este pedido?')) {
-      var result = await api.delete('client/pedidos/' + id);
-      if (result.status === 200) {
-        window.location.href = '/client/pedidos';
-      } else {
-        alert('Ocorreu um erro. Por favor, tente novamente!');
-      }
-    }
-  }
-
   return (
     <div className={classes.root}>
       <MenuUsuario title={'Sis Web CRI - Meus Pedidos'} />

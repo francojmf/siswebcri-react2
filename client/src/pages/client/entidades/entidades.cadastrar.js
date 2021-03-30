@@ -25,11 +25,11 @@ export default function EntidadeCadastrar() {
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
   const [cep, setCep] = useState('');
+  const [bairro, setBairro] = useState('');
   const [cidade, setCidade] = React.useState('');
   const [estado, setEstado] = React.useState('SP');
   const [uf, setUf] = React.useState('SP');
   const [listUf, setListUf] = React.useState([]);
-  // const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
   console.log(uf);
   console.log(estado);
@@ -66,6 +66,9 @@ export default function EntidadeCadastrar() {
       loadCity(uf);
     }
   }, [uf]);
+
+  function clickEvent(event, a, b) {}
+
   console.log(listCity);
 
   async function handleSubmit() {
@@ -78,6 +81,7 @@ export default function EntidadeCadastrar() {
       numero: numero,
       complemento: complemento,
       cep: cep,
+      bairro: bairro,
       cidade: cidade,
       estado: estado,
     };
@@ -88,8 +92,8 @@ export default function EntidadeCadastrar() {
       fone !== '' &&
       logradouro !== '' &&
       numero !== '' &&
-      complemento !== '' &&
       cep !== '' &&
+      bairro !== '' &&
       cidade !== '' &&
       estado !== ''
     ) {
@@ -212,15 +216,20 @@ export default function EntidadeCadastrar() {
                       label="Bairro"
                       fullWidth
                       value={cep}
-                      onChange={(e) => setCep(e.target.value)}
+                      onChange={(e) => setBairro(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
                     <label> Estado : </label>
                     <Select
                       value={uf}
-                      onChange={(e) => setEstado(e.target.name)}
-                      onChange={(e) => setUf(e.target.value)}
+                      onChange={(e) =>
+                        clickEvent(
+                          e,
+                          setEstado(e.target.name),
+                          setUf(e.target.value)
+                        )
+                      }
                     >
                       {listUf.map((a, b) => (
                         <option name={a.sigla} value={a.id}>

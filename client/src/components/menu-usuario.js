@@ -41,7 +41,7 @@ export default function MenuUsuario({ title }) {
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
-            color="green"
+            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             className={clsx(
@@ -54,7 +54,7 @@ export default function MenuUsuario({ title }) {
           <Typography
             component="h1"
             variant="h6"
-            color="green"
+            color="inherit"
             noWrap
             className={classes.title}
           >

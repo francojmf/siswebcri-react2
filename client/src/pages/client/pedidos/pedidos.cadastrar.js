@@ -60,11 +60,10 @@ export default function PedidoCadastrar() {
   }, []);
 
   function clickEvent(event, a, b) {}
-  function clickEvent2(event, a, b) {}
 
-  console.log(idUsuario);
-  console.log(produtoId);
-  console.log(entidadeId);
+  // console.log(idUsuario);
+  // console.log(produtoId);
+  // console.log(entidadeId);
 
   async function handleSubmit() {
     const data = {

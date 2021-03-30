@@ -99,8 +99,8 @@ export default function EntidadesListagem() {
                                     {item.cpf_cnpj}
                                   </TableCell>
                                   <TableCell align="center">
-                                    {item.logradouro}, {item.numero} -
-                                    {item.complemento}
+                                    {item.logradouro}, {item.numero},
+                                    {item.complemento} , {item.bairro}
                                   </TableCell>
                                   <TableCell align="center">
                                     {item.cidade} - {item.estado}
@@ -127,9 +127,10 @@ export default function EntidadesListagem() {
                         </Table>
                       )}
                     </TableContainer>
+                    <p></p>
                     <p>
-                      Ao clicar em ATUALIZAR aparecerão os demais campos que se
-                      pode editar.
+                      Ao clicar em ATUALIZAR aparecerão os campos que se pode
+                      editar.
                     </p>
                   </Grid>
                 </Grid>
