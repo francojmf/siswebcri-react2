@@ -4,7 +4,7 @@ const Usuario = require('./controllers/usuarios.controller');
 const Produto = require('./controllers/produtos.controller');
 const Pedido = require('./controllers/pedidos.controller');
 const Entidade = require('./controllers/entidades.controller');
-routes.get('/', Usuario.index);
+routes.get('/', Produto.index);
 // Rotas de Usuários
 routes.post('/api/usuarios', Usuario.create);
 routes.get('/api/usuarios', Usuario.index);
