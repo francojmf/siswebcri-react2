@@ -15,6 +15,8 @@ import { useParams } from 'react-router-dom';
 
 export default function EntidadesEditar() {
   const classes = useStyles();
+  const entidades = useState([]);
+  const [mount, setMount] = useState(false);
   const [nome, setNome] = useState('Entidade');
   const [cpf_cnpj, setCpf] = useState('CPF_cnpj');
   const [fone, setFone] = useState('(12) 981-');
@@ -30,22 +32,25 @@ export default function EntidadesEditar() {
   // console.log(idEntidade);
 
   useEffect(() => {
-    async function getEntidade() {
-      var response = await api.get('/api/entidades.details/' + idEntidade);
-      setNome(response.data.nome_entidade);
-      setCpf(response.data.cpf_cnpj);
-      setUser(response.data.user);
-      setFone(response.data.fone_entidade);
-      setLogradouro(response.data.logradouro);
-      setNumero(response.data.numero);
-      setComplemento(response.data.complemento);
-      setCep(response.data.cep);
-      setBairro(response.data.bairro);
-      setCidade(response.data.cidade);
-      setEstado(response.data.estado);
+    if (!mount) {
+      setMount(true);
+      async function getEntidade() {
+        var response = await api.get('/api/entidades.details/' + idEntidade);
+        setNome(response.data.nome_entidade);
+        setCpf(response.data.cpf_cnpj);
+        setUser(response.data.user);
+        setFone(response.data.fone_entidade);
+        setLogradouro(response.data.logradouro);
+        setNumero(response.data.numero);
+        setComplemento(response.data.complemento);
+        setCep(response.data.cep);
+        setBairro(response.data.bairro);
+        setCidade(response.data.cidade);
+        setEstado(response.data.estado);
+      }
+      getEntidade();
     }
-    getEntidade();
-  }, []);
+  }, [entidades]);
 
   async function handleSubmit() {
     const data = {
@@ -246,11 +251,7 @@ export default function EntidadesEditar() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Button
-                      variant="contained"
-                      onClick={handleSubmit}
-                      variant="contained"
-                    >
+                    <Button variant="contained" onClick={handleSubmit}>
                       <SaveIcon /> Salvar
                     </Button>
                   </Grid>

@@ -15,7 +15,7 @@ import { useStyles } from '../../../functions/use_styles';
 
 export default function MeuUsuarioEditar() {
   const classes = useStyles();
-
+  const [mount, setMount] = useState(false);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -25,15 +25,17 @@ export default function MeuUsuarioEditar() {
   const { idUsuario } = useParams();
 
   useEffect(() => {
-    async function getUsuario() {
-      var response = await api.get('/api/usuarios.details/' + idUsuario);
-      setNome(response.data.nome_usuario);
-      setEmail(response.data.email_usuario);
-      setSenha(response.data.senha_usuario);
-      setTipo(response.data.tipo_usuario);
+    if (!mount) {
+      setMount(true);
+      async function getUsuario() {
+        var response = await api.get('/api/usuarios.details/' + idUsuario);
+        setNome(response.data.nome_usuario);
+        setEmail(response.data.email_usuario);
+        setSenha(response.data.senha_usuario);
+        setTipo(response.data.tipo_usuario);
+      }
+      getUsuario();
     }
-
-    getUsuario();
   }, []);
 
   async function handleSubmit() {

@@ -357,7 +357,7 @@ export default function PedidoCadastrar() {
                       <Button
                         style={{ marginBottom: 30 }}
                         variant="contained"
-                        color="success"
+                        color="primary"
                         href={'/admin/pedidos'}
                       >
                         <ArrowBackIcon /> Voltar
@@ -368,7 +368,7 @@ export default function PedidoCadastrar() {
               </Grid>
               <div>
                 <p>- Faça as medidas de acordo com a imagem abaixo.</p>
-                <img src={ImgMedidas} />
+                <img src={ImgMedidas} alt="medidas" />
               </div>
             </Grid>
             <Box pt={4}>

@@ -16,23 +16,25 @@ import { useStyles } from '../../../functions/use_styles';
 
 export default function ProdutoEditar() {
   const classes = useStyles();
-
+  const [mount, setMount] = useState(false);
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [tipo, setTipo] = useState('');
   const [qtd, setQtd] = useState('');
-
-  const { idProduto } = useParams();
+  const idProduto = useParams();
 
   useEffect(() => {
-    async function getProduto() {
-      var response = await api.get('/api/produtos.details/' + idProduto);
-      setNome(response.data.nome_produto);
-      setDescricao(response.data.descricao_produto);
-      setTipo(response.data.tipo_produto);
-      setQtd(response.data.qtd_produto);
+    if (!mount) {
+      setMount(true);
+      async function getProduto() {
+        var response = await api.get('/api/produtos.details/' + idProduto);
+        setNome(response.data.nome_produto);
+        setDescricao(response.data.descricao_produto);
+        setTipo(response.data.tipo_produto);
+        setQtd(response.data.qtd_produto);
+      }
+      getProduto();
     }
-    getProduto();
   }, []);
 
   async function handleSubmit() {
@@ -69,7 +71,7 @@ export default function ProdutoEditar() {
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/admin/produtos'}
               >
                 <ArrowBackIcon /> Voltar

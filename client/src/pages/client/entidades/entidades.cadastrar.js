@@ -120,7 +120,7 @@ export default function EntidadeCadastrar() {
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/client/pedidos'}
               >
                 <ArrowBackIcon /> Voltar
@@ -128,7 +128,7 @@ export default function EntidadeCadastrar() {
               {/* <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/client/produtos/appCep'}
               >
                 Busca CEP com Logradouro

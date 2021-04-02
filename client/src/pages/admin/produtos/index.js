@@ -56,7 +56,7 @@ export default function ProdutosListagem() {
               <Button
                 style={{ marginBottom: 10 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/admin/produtos/cadastrar'}
               >
                 <AddIcon />

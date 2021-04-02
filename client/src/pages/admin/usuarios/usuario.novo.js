@@ -57,7 +57,7 @@ export default function UsuarioNovo() {
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/admin/usuarios'}
               >
                 <ArrowBackIcon /> Voltar

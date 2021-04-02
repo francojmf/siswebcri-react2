@@ -48,7 +48,7 @@ export default function Dashboard() {
           </tr>
           <tr>
             <td>
-              <img src={ImgCri} />
+              <img src={ImgCri} alt="CRI disponivel" />
             </td>
             <td></td>
           </tr>

@@ -25,8 +25,6 @@ import PrivateRoute from './services/wAuth';
 import MinhaEntidade from './pages/client/entidades';
 import EntidadeCadastrar from './pages/client/entidades/entidades.cadastrar';
 import EntidadeEditar from './pages/client/entidades/entidades.editar';
-//import AppCEP from './pages/client/produtos/appCep';
-//import AppCEP2 from './pages/admin/entidades/appCep';
 import MeusPedidos from './pages/client/pedidos';
 import PedidoCadastrar from './pages/client/pedidos/pedidos.cadastrar';
 import PedidoEditar from './pages/client/pedidos/pedidos.editar';

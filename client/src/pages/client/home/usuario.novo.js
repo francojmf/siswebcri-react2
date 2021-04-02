@@ -56,7 +56,7 @@ export default function UsuarioCadastrar() {
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/'}
               >
                 <ArrowBackIcon /> Voltar

@@ -57,7 +57,7 @@ export default function EntidadesListagem() {
               <Button
                 style={{ marginBottom: 10 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/admin/entidades/cadastrar'}
               >
                 <AddIcon />

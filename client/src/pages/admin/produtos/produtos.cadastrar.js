@@ -53,7 +53,7 @@ export default function ProdutoCadastrar() {
               <Button
                 style={{ marginBottom: 30 }}
                 variant="contained"
-                color="success"
+                color="primary"
                 href={'/admin/produtos'}
               >
                 <ArrowBackIcon /> Voltar

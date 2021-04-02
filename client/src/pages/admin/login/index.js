@@ -152,7 +152,7 @@ export default function SignIn() {
               <Button
                 fullWidth
                 variant="contained"
-                color="success"
+                color="primary"
                 className={classes.submit}
                 onClick={loadSubmit}
                 disabled={loading}

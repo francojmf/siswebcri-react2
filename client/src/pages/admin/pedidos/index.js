@@ -177,7 +177,7 @@ export default function PedidosListagem() {
                       <Button
                         style={({ marginBottom: 10 }, { marginLeft: 10 })}
                         variant="contained"
-                        color="success"
+                        color="primary"
                         href={'/admin/pedidos/cadastrar'}
                       >
                         <AddIcon />

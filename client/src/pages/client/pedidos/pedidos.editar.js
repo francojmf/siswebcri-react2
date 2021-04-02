@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@material-ui/core/Box';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +17,8 @@ import { useStyles } from '../../../functions/use_styles';
 
 export default function PedidosEditar() {
   const classes = useStyles();
+  const pedidos = useState([]);
+  const [mount, setMount] = useState(false);
   const [user, setUser] = useState('');
   const [produto, setProduto] = useState('');
   const [entidade, setEntidade] = useState('');
@@ -37,26 +38,29 @@ export default function PedidosEditar() {
   // console.log(idPedido);
 
   useEffect(() => {
-    async function getPedido() {
-      var response = await api.get('/api/pedidos.details/' + idPedido);
-      setUser(response.data.user);
-      setProduto(response.data.produto);
-      setEntidade(response.data.entidade);
-      setPessoa(response.data.nome_pessoa);
-      setIdade(response.data.idade_pessoa);
-      setMedA(response.data.med_a);
-      setMedB(response.data.med_b);
-      setMedC(response.data.med_c);
-      setMedD(response.data.med_d);
-      setMedE(response.data.med_e);
-      setMedF(response.data.med_f);
-      setCreate(response.data.createdAt);
-      setStatus(response.data.status_pedido);
-      setAprovado(response.data.aprovado_pedido);
-      setEnviado(response.data.enviado_pedido);
+    if (!mount) {
+      setMount(true);
+      async function getPedido() {
+        var response = await api.get('/api/pedidos.details/' + idPedido);
+        setUser(response.data.user);
+        setProduto(response.data.produto);
+        setEntidade(response.data.entidade);
+        setPessoa(response.data.nome_pessoa);
+        setIdade(response.data.idade_pessoa);
+        setMedA(response.data.med_a);
+        setMedB(response.data.med_b);
+        setMedC(response.data.med_c);
+        setMedD(response.data.med_d);
+        setMedE(response.data.med_e);
+        setMedF(response.data.med_f);
+        setCreate(response.data.createdAt);
+        setStatus(response.data.status_pedido);
+        setAprovado(response.data.aprovado_pedido);
+        setEnviado(response.data.enviado_pedido);
+      }
+      getPedido();
     }
-    getPedido();
-  }, []);
+  }, [pedidos]);
 
   async function handleSubmit() {
     const data = {
