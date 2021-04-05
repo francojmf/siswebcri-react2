@@ -14,7 +14,7 @@ import { getNomeUsuario, getIdUsuario } from '../services/auth';
 
 export const mainListItems = (
   <div>
-    <ListItem button component="a" href="/admin">
+    <ListItem button component="a" href="/usuario">
       <ListItemIcon>
         <DashboardIcon style={{ color: 'green' }} />
       </ListItemIcon>
